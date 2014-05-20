@@ -11,7 +11,10 @@ public:
 	Cue();
 	~Cue();
 
-	
+
+	// update and draw
+	void Update();
+	void Draw();	
 };
 
 

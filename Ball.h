@@ -11,9 +11,10 @@ class Ball
 private:
 	Vector2 position;
 	Vector2 speed;
+	float radius;
 
 public:
-	Ball(Vector2 position, Vector2 speed);
+	Ball(Vector2 position, Vector2 speed, float radius);
 	~Ball();
 
 	// get and set methods
@@ -21,8 +22,8 @@ public:
 	Vector2 getSpeed() const;
 
 	// update and draw
-	virtual void update();
-	virtual void draw();
+	virtual void Update();
+	virtual void Draw(QPainter &);
 };
 
 

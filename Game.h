@@ -14,7 +14,9 @@ public:
 	Game();
 	~Game();
 
-	
+	// update and draw
+	void Update();
+	void Draw();
 };
 
 

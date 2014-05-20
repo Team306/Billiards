@@ -18,7 +18,9 @@ public:
 	BallsManager();
 	~BallsManager();
 
-	// methods
+	// update and draw
+	void Update();
+	void Draw();
 };
 
 

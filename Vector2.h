@@ -7,18 +7,26 @@
 class Vector2
 {
 private:
-	int x;
-	int y;
+	float x;
+	float y;
 
 public:
-	Vector2(int x = 0, int y = 0);
+	Vector2(float x = 0, float y = 0);
 	~Vector2();
 
-	int getX() const;
-	int getY() const;
-	bool setXY(int, int);
+	// get and set methods
+	float getX() const;
+	float getY() const;
+	void setXY(float, float);
 
 	// override operators
+	Vector2 operator+(Vector2 &);
+	Vector2 operator-(Vector2 &);
+	float dotProduct(Vector2 &);
+	// Vector2 crossProduct(Vector2 &);
+
+	Vector2 operator+=(Vector2 &);
+	Vector2 operator-=(Vector2 &);
 };
 
 
