@@ -13,6 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        window.cpp
+        window.cpp \
+    renderarea.cpp
 
-HEADERS  += window.h
+HEADERS  += window.h \
+    renderarea.h
