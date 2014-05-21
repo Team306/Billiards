@@ -14,7 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         window.cpp \
-    renderarea.cpp
+    renderarea.cpp \
+    Game.cpp \
+    Ball.cpp \
+    Vector2.cpp
 
 HEADERS  += window.h \
-    renderarea.h
+    renderarea.h \
+    Ball.h \
+    BallsManager.h \
+    Cue.h \
+    Game.h \
+    Vector2.h

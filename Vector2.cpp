@@ -2,10 +2,11 @@
 
 #include "Vector2.h"
 
-Vector2::Vector2(float x = 0, float y = 0)
+Vector2::Vector2(float x, float y)
+    : x(x), y(y)
 {
-	this->x = x;
-	this->y = y;
+//	this->x = x;
+//	this->y = y;
 }
 
 Vector2::~Vector2()
@@ -54,8 +55,8 @@ float Vector2::dotProduct(Vector2& v)
 Vector2 Vector2::operator+=(Vector2& v)
 {
 	Vector2 result = *this + v;
-	this->x = result->x;
-	this->y = result->y;
+    this->x = result.x;
+    this->y = result.y;
 	return result;
 }
 

@@ -4,6 +4,8 @@
 #define GAME_H 
 
 
+#include <QPainter>
+
 // control all logic in this class
 // such as initialize a new game
 // change game state, etc.
@@ -14,9 +16,12 @@ public:
 	Game();
 	~Game();
 
+	void init(); // do all init here
+
 	// update and draw
 	void Update();
-	void Draw();
+	void Draw(QPainter &);
+	
 };
 
 

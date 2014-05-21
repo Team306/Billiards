@@ -1,13 +1,26 @@
+#include <QPainter>
 #include "renderarea.h"
 
 RenderArea::RenderArea(QWidget *parent) :
     QWidget(parent)
 {
-
+    // init game
+    game.init();
 }
 
-// lock size in 1280 x 720
-QSize RenderArea::sizeHint() const
+void RenderArea::MainLoop()
 {
-    return QSize(1280, 720);
+    // Main loop
+    game.Update();
+    // call Qt redraw a frame
+    update();
 }
+
+void RenderArea::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+
+    // draw a frame
+    game.Draw(painter);
+}
+

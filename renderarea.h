@@ -2,6 +2,7 @@
 #define RENDERAREA_H
 
 #include <QWidget>
+#include "Game.h"
 
 class RenderArea : public QWidget
 {
@@ -9,11 +10,16 @@ class RenderArea : public QWidget
 public:
     explicit RenderArea(QWidget *parent = 0);
 
-    QSize sizeHint() const;
 signals:
 
 public slots:
+    void MainLoop();
 
+protected:
+    void paintEvent(QPaintEvent *);
+
+private:
+    Game game;
 };
 
 #endif // RENDERAREA_H

@@ -4,6 +4,7 @@
 #define BALL_H 
 
 
+#include <QPainter>
 #include "Vector2.h"
 
 class Ball
@@ -12,6 +13,8 @@ private:
 	Vector2 position;
 	Vector2 speed;
 	float radius;
+
+	// and some variables about rotation
 
 public:
 	Ball(Vector2 position, Vector2 speed, float radius);

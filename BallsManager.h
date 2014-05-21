@@ -20,7 +20,7 @@ public:
 
 	// update and draw
 	void Update();
-	void Draw();
+	void Draw(QPainter &);
 };
 
 
