@@ -20,13 +20,16 @@ public:
 	void setXY(float, float);
 
 	// override operators
-	Vector2 operator+(Vector2 &);
-	Vector2 operator-(Vector2 &);
-	float dotProduct(Vector2 &);
+    Vector2 operator+(Vector2 &) const;
+    Vector2 operator-(Vector2 &) const;
+    float dotProduct(Vector2 &) const;
 	// Vector2 crossProduct(Vector2 &);
 
 	Vector2 operator+=(Vector2 &);
 	Vector2 operator-=(Vector2 &);
+
+	float getNorm() const; // length
+    float distanceBetween(Vector2 &) const;
 };
 
 

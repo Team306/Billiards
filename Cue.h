@@ -11,6 +11,7 @@ class Cue
 {
 private:
 	Vector2 position; // the position the cue points to
+	// the position of the cue-ball 
 
 public:
 	Cue();

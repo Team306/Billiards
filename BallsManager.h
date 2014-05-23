@@ -18,6 +18,10 @@ public:
 	BallsManager();
 	~BallsManager();
 
+	// init methods
+	void init();
+	void reset(); // reset all balls position
+
 	// update and draw
 	void Update();
 	void Draw(QPainter &);

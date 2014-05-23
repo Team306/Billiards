@@ -1,3 +1,5 @@
+// Copyright (C) 2014 Team306
+
 #include "Game.h"
 
 Game::Game()
@@ -21,5 +23,8 @@ void Game::Update()
 
 void Game::Draw(QPainter& painter)
 {
-	// draw
+	// draw all thing 
+
+	// table.draw(painter);
+	// ballsManager.draw(painter);
 }

@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     renderarea.cpp \
     Game.cpp \
     Ball.cpp \
-    Vector2.cpp
+    Vector2.cpp \
+    BallsManager.cpp
 
 HEADERS  += window.h \
     renderarea.h \
