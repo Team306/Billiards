@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\window.o
+./release\renderarea.o
+./release\Game.o
+./release\Ball.o
+./release\Vector2.o
+./release\BallsManager.o
+./release\Table.o
+./release\moc_window.o
+./release\moc_renderarea.o
+);

@@ -6,7 +6,7 @@
 
 #include <QPainter>
 #include "BallsManager.h"
-// #include "Table.h"
+#include "Table.h"
 
 // control all logic in this class
 // such as initialize a new game
@@ -16,7 +16,7 @@ class Game
 {
 private:
 	BallsManager ballsManager;
-	// Table table;
+	Table table;
 
 public:
 	Game();

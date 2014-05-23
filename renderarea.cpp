@@ -19,7 +19,7 @@ void RenderArea::MainLoop()
 void RenderArea::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-
+    painter.setRenderHint(QPainter::Antialiasing);
     // draw a frame
     game.Draw(painter);
 }

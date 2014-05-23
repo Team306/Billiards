@@ -4,6 +4,8 @@
 
 BallsManager::BallsManager()
 {
+    Ball ball(Vector2(50, 50), Vector2(5, 3), 10);
+    ballsList.push_back(ball);
 }
 
 BallsManager::~BallsManager()
