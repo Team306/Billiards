@@ -29,7 +29,7 @@ void Table::Draw(QPainter& painter)
     painter.setBrush(QBrush(blue_iro));
     painter.setPen(QPen(QColor(0, 0, 255)));
 
-	painter.drawRect(QRectF(position.getX(), position.getY(), size.getX(), size.getX()));
+	painter.drawRect(QRectF(position.getX(), position.getY(), size.getX(), size.getY()));
 }
 
 // collision detection

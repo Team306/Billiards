@@ -3,7 +3,7 @@
 #include "Game.h"
 
 Game::Game()
-	:table(Vector2(10, 10), Vector2(1000, 700), Vector2(0, 0), Vector2(1000, 700))
+    :table(Vector2(0, 0), Vector2(1000, 700), Vector2(0, 0), Vector2(1000, 700))
 {
 	// initialize in init method
 }

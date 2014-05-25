@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,19 +14,18 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        window.cpp \
-    renderarea.cpp \
     Game.cpp \
     Ball.cpp \
     Vector2.cpp \
     BallsManager.cpp \
-    Table.cpp
+    Table.cpp \
+    glwindow.cpp
 
-HEADERS  += window.h \
-    renderarea.h \
+HEADERS  += \
     Ball.h \
     BallsManager.h \
     Cue.h \
     Game.h \
     Vector2.h \
-    Table.h
+    Table.h \
+    glwindow.h

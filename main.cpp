@@ -1,10 +1,10 @@
-#include "window.h"
+#include "glwindow.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Window w;
+    GLWindow w;
     w.show();
 
     return a.exec();

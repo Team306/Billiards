@@ -35,9 +35,7 @@ void Ball::Update()
 
 void Ball::Draw(QPainter& painter)
 {
-	// draw itself here
-	// first set color
-	// how to set antialiasing?
+	// draw itself
 	QColor kagamine_iro(255, 252, 0);
 	painter.setBrush(kagamine_iro);
     painter.drawEllipse(QPoint(position.getX() - radius, position.getY() - radius), radius, radius);
