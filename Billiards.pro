@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     Vector2.cpp \
     BallsManager.cpp \
     Table.cpp \
-    glwindow.cpp
+    glwindow.cpp \
+    Referee.cpp
 
 HEADERS  += \
     Ball.h \
@@ -28,4 +29,5 @@ HEADERS  += \
     Game.h \
     Vector2.h \
     Table.h \
-    glwindow.h
+    glwindow.h \
+    Referee.h

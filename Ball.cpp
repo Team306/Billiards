@@ -19,9 +19,19 @@ Vector2 Ball::getPosition() const
 	return position;
 }
 
+void Ball::setPosition(Vector2 v)
+{
+	position = v;
+}
+
 Vector2 Ball::getSpeed() const
 {
 	return speed;
+}
+
+void Ball::setSpeed(Vector2 v)
+{
+	speed = v;
 }
 
 void Ball::Update()

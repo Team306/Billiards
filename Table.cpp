@@ -2,13 +2,21 @@
 
 #include "Table.h"
 
-Table::Table(Vector2 position, Vector2 size, Vector2 picPosition, Vector2 picSize)
-	: position(position), size(size), picPosition(picPosition), picSize(picSize)
+Table::Table()
 {
 }
 
 Table::~Table()
 {
+}
+
+void Table::init(Referee& referee)
+{
+	// init method
+    picPosition.setXY(0, 0);
+    position.setXY(40, 40);
+    picSize.setXY(1280, 720);
+    size.setXY(1200, 640);
 }
 
 Vector2 Table::getSize() const
@@ -28,7 +36,9 @@ void Table::Draw(QPainter& painter)
     QColor blue_iro(66, 204, 255);
     painter.setBrush(QBrush(blue_iro));
     painter.setPen(QPen(QColor(0, 0, 255)));
+	painter.drawRect(QRectF(picPosition.getX(), picPosition.getY(), picSize.getX(), picSize.getY()));
 
+	painter.setBrush(QBrush(QColor(0, 255, 0)));
 	painter.drawRect(QRectF(position.getX(), position.getY(), size.getX(), size.getY()));
 }
 

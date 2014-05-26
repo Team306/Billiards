@@ -17,10 +17,10 @@ class Game
 private:
 	BallsManager ballsManager;
 	Table table;
+	Referee referee; 
 	// Cue cue;
 	// Player player1;
 	// Player player2;
-	// Referee referee; 
 
 	// other like Game state
 	// GameState gameState;

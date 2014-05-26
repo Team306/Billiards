@@ -7,6 +7,7 @@
 #include <QPainter>
 #include "Vector2.h"
 #include "Ball.h"
+#include "Referee.h"
 
 class Table
 {
@@ -19,8 +20,11 @@ private:
 	Vector2 picPosition;
 
 public:
-	Table(Vector2 position, Vector2 size, Vector2 picPosition, Vector2 picSize);
+	Table();
 	~Table();
+
+	// init method
+	void init(Referee &);
 
 	// get and set method
 	Vector2 getSize() const;

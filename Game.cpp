@@ -3,7 +3,6 @@
 #include "Game.h"
 
 Game::Game()
-    :table(Vector2(0, 0), Vector2(1000, 700), Vector2(0, 0), Vector2(1000, 700))
 {
 	// initialize in init method
 }
@@ -15,6 +14,9 @@ Game::~Game()
 void Game::init()
 {
 	// init here
+    referee.init();
+    table.init(referee);
+	ballsManager.init(referee);
 }
 
 void Game::Update()

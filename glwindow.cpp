@@ -44,6 +44,9 @@ void GLWindow::initializeGL()
 	glEnable(GL_MULTISAMPLE);
     glShadeModel(GL_SMOOTH);
     glClearColor(0.0, 0.0, 0.0, 1.0);
+
+    // temp put init here
+    game.init();
 }
 
 void GLWindow::mousePressEvent(QMouseEvent *event)
@@ -71,5 +74,12 @@ void GLWindow::MainLoop()
 {
 	game.Update();
 	// call repaint
-	update();
+    update();
+    // updateGL();
+}
+
+void GLWindow::paintGL()
+{
+    makeCurrent();
+    glClear(GL_COLOR_BUFFER_BIT);
 }

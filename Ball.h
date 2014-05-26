@@ -5,6 +5,8 @@
 
 
 #include <QPainter>
+#include <QColor>
+#include <string>
 #include "Vector2.h"
 
 class Ball
@@ -19,13 +21,19 @@ private:
 	float upRotation;
 	// should put them into a vector?
 
+	// ball's info
+	std::string name;
+	QColor color;
+
 public:
-	Ball(Vector2 position, Vector2 speed, float radius);
+    Ball(Vector2 position, Vector2 speed, float radius);
 	~Ball();
 
 	// get and set methods
 	Vector2 getPosition() const;
+	void setPosition(Vector2);
 	Vector2 getSpeed() const;
+	void setSpeed(Vector2);
 	// getRotation
 
 	// update and draw
