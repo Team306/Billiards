@@ -2,12 +2,19 @@
 
 #include "Ball.h"
 
-Ball::Ball(Vector2 position, Vector2 speed, float radius)
-	: position(position), speed(speed), radius(radius)
+Ball::Ball()
 {
-	// init rotation value
 	rightRotation = 0;
 	upRotation = 0;
+
+	ballState = STILL;
+}
+
+Ball::Ball(Vector2 position, float radius)
+    : position(position), radius(radius)
+{
+	// init rotation value
+    Ball();
 }
 
 Ball::~Ball()
@@ -34,6 +41,21 @@ void Ball::setSpeed(Vector2 v)
 	speed = v;
 }
 
+std::string Ball::getName() const
+{
+	return name;
+}
+
+void Ball::setName(std::string n)
+{
+	name = n;
+}
+
+void Ball::setColor(QColor c)
+{
+	color = c;
+}
+
 void Ball::Update()
 {
 	position += speed;
@@ -45,10 +67,14 @@ void Ball::Update()
 
 void Ball::Draw(QPainter& painter)
 {
+	if (ballState == ON_THE_POCKET)
+	{
+		return;
+	}
+
 	// draw itself
-	QColor kagamine_iro(255, 252, 0);
-	painter.setBrush(kagamine_iro);
-    painter.drawEllipse(QPoint(position.getX() - radius, position.getY() - radius), radius, radius);
+	painter.setBrush(color);
+    painter.drawEllipse(QPoint(position.getX(), position.getY()), radius, radius);
 }
 
 // only return if 2 balls collide

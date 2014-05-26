@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+#include "Ball.h"
 
 // define rule in it
 // maybe can use embedded scripts to implement
@@ -13,6 +14,7 @@ class Referee
 {
 private:
 	// in referee is a state machine, log the game state
+	float ballRadius;
 
 public:
 	Referee();
@@ -23,7 +25,9 @@ public:
 	void chooseRule(std::string ruleName);
 
 	// get rule
-	
+	std::vector<Ball> getBallsList() const;
+	Ball getCueBall() const;
+	float getBallRadius() const;
 };
 
 

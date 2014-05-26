@@ -9,6 +9,8 @@
 #include <string>
 #include "Vector2.h"
 
+enum BALL_STATE { STILL, RUNNING, ON_THE_POCKET };
+
 class Ball
 {
 private:
@@ -25,8 +27,11 @@ private:
 	std::string name;
 	QColor color;
 
+	BALL_STATE ballState;
+
 public:
-    Ball(Vector2 position, Vector2 speed, float radius);
+	Ball();
+    Ball(Vector2 position, float radius);
 	~Ball();
 
 	// get and set methods
@@ -34,6 +39,11 @@ public:
 	void setPosition(Vector2);
 	Vector2 getSpeed() const;
 	void setSpeed(Vector2);
+
+	std::string getName() const;
+	void setName(std::string);
+	void setColor(QColor);
+	
 	// getRotation
 
 	// update and draw

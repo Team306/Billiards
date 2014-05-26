@@ -33,6 +33,9 @@ GLWindow::GLWindow(QWidget *parent)
     {
    	    move((desktop->width() - this->width()) / 2, (desktop->height() - this->height()) / 2);
     }
+
+    // about mouse event
+    setMouseTracking(true);
 }
 
 GLWindow::~GLWindow()
@@ -56,7 +59,7 @@ void GLWindow::mousePressEvent(QMouseEvent *event)
 
 void GLWindow::mouseMoveEvent(QMouseEvent *event)
 {
-	//
+    game.setMousePosition(Vector2(event->x(), event->y()));
 }
 
 void GLWindow::paintEvent(QPaintEvent *event)

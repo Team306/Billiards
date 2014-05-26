@@ -28,8 +28,11 @@ public:
 	Vector2 operator+=(Vector2 &);
 	Vector2 operator-=(Vector2 &);
 
-	float getNorm() const; // length
+	float Length() const; // length
     float distanceBetween(Vector2 &) const;
+
+    Vector2 getNormalize() const;
+    Vector2 getVertical() const;
 };
 
 

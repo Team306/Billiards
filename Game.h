@@ -7,23 +7,27 @@
 #include <QPainter>
 #include "BallsManager.h"
 #include "Table.h"
+#include "Cue.h"
 
 // control all logic in this class
 // such as initialize a new game
 // change game state, etc.
-// in a Game must have a cue and a ballsManager
+
+enum GAME_STATE { WAIT_FOR_STROKE, FREE_BALL, BALL_IS_RUNNING };
+
 class Game
 {
 private:
 	BallsManager ballsManager;
 	Table table;
-	Referee referee; 
-	// Cue cue;
+	Referee referee;
+	Cue cue;
+	Vector2 mousePosition;
 	// Player player1;
 	// Player player2;
 
-	// other like Game state
-	// GameState gameState;
+	// Game state
+	GAME_STATE gameState;
 
 public:
 	Game();
@@ -34,7 +38,10 @@ public:
 	// update and draw
 	void Update();
 	void Draw(QPainter &);
-	
+
+	// deal with mouse event
+	void setMousePosition(Vector2);
+
 };
 
 

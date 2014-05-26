@@ -69,7 +69,7 @@ Vector2 Vector2::operator-=(Vector2& v)
 	return result;
 }
 
-float Vector2::getNorm() const
+float Vector2::Length() const
 {
 	return sqrt(x * x + y * y);
 }
@@ -77,5 +77,17 @@ float Vector2::getNorm() const
 float Vector2::distanceBetween(Vector2& v) const
 {
     Vector2 distance = (*this) - v;
-	return distance.getNorm();
+    return distance.Length();
+}
+
+Vector2 Vector2::getNormalize() const
+{
+	Vector2 result(x / Length(), y / Length());
+	return result;
+}
+
+Vector2 Vector2::getVertical() const
+{
+	Vector2 result(-y, x);
+	return result;
 }

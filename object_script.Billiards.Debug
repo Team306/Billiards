@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\Game.o
+./debug\Ball.o
+./debug\Vector2.o
+./debug\BallsManager.o
+./debug\Table.o
+./debug\glwindow.o
+./debug\Referee.o
+./debug\Cue.o
+./debug\moc_glwindow.o
+);

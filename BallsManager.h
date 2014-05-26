@@ -7,9 +7,9 @@
 #include <vector>
 #include "Ball.h"
 #include "Referee.h"
+#include "Table.h"
 
 // detect all collisions in this class
-// maybe can use singleton
 class BallsManager
 {
 private:
@@ -25,7 +25,7 @@ public:
 	void reset(Referee &); // reset all balls position
 
 	// update and draw
-	void Update();
+	void Update(Table &);
 	void Draw(QPainter &);
 
 	// get and set

@@ -31,7 +31,6 @@ private slots:
 private:
 	Game game;
 
-	QPoint lastPos;
 	QTimer timer;
 };
 

@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     BallsManager.cpp \
     Table.cpp \
     glwindow.cpp \
-    Referee.cpp
+    Referee.cpp \
+    Cue.cpp
 
 HEADERS  += \
     Ball.h \

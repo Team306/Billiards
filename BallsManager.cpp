@@ -3,12 +3,7 @@
 #include "BallsManager.h"
 
 BallsManager::BallsManager()
-    : cueBall(Vector2(), Vector2(), 30)
 {
-    Ball ball(Vector2(50, 50), Vector2(5, 3), 30);
-    ballsList.push_back(ball);
-    Ball ball1(Vector2(1000, 500), Vector2(-2, -4), 30);
-    ballsList.push_back(ball1);
 }
 
 BallsManager::~BallsManager()
@@ -18,7 +13,8 @@ BallsManager::~BallsManager()
 void BallsManager::init(Referee& referee)
 {
 	// call referee for balls' info
-
+	ballsList = referee.getBallsList();
+	cueBall = referee.getCueBall();
 }
 
 void BallsManager::reset(Referee& referee)
@@ -26,14 +22,48 @@ void BallsManager::reset(Referee& referee)
 	// reset and init maybe the same
 }
 
-void BallsManager::Update()
+void BallsManager::Update(Table& table)
 {
+	// Update each ball
+    cueBall.Update();
 	for (std::vector<Ball>::iterator iter = ballsList.begin(); iter != ballsList.end(); ++iter)
 	{
-		// Update each ball here;
 		iter->Update();
 	}
-    cueBall.Update();
+
+    // detect collision
+    if (table.collidesWith(cueBall))
+    {
+    	// change speed or sth else
+
+    }
+    for (unsigned i = 0; i < ballsList.size(); ++i)
+    {
+    	// first detect cue ball
+		if (cueBall.collidesWith(ballsList[i]))
+		{
+			// change speed or sth else
+
+		}
+
+		// and then detect the balls with table
+		if (table.collidesWith(ballsList[i]))
+		{
+			// change speed or sth else
+
+		}
+
+		// finally detect other ball
+    	for (unsigned j = i + 1; j < ballsList.size(); ++j)
+    	{
+    		if (ballsList[i].collidesWith(ballsList[j]))
+    		{
+    			// change speed or sth else
+
+    		}
+    	}
+    }
+
 }
 
 void BallsManager::Draw(QPainter& painter)
