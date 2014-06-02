@@ -41,6 +41,11 @@ void Ball::setSpeed(Vector2 v)
 	speed = v;
 }
 
+float Ball::getRadius() const
+{
+	return radius;
+}
+
 std::string Ball::getName() const
 {
 	return name;

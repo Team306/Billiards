@@ -6,6 +6,7 @@ Game::Game()
 {
 	// initialize in init method
 	gameState = WAIT_FOR_STROKE;
+	// gameState = FREE_BALL;
 }
 
 Game::~Game()
@@ -26,6 +27,11 @@ void Game::Update()
 	// update
 	table.Update(); // is needed?
 	ballsManager.Update(table);
+
+	if (gameState == FREE_BALL)
+	{
+		ballsManager.getCueBall().setPosition(mousePosition);
+	}
 }
 
 void Game::Draw(QPainter& painter)

@@ -36,6 +36,7 @@ GLWindow::GLWindow(QWidget *parent)
 
     // about mouse event
     setMouseTracking(true);
+    setCursor(Qt::CrossCursor);
 }
 
 GLWindow::~GLWindow()
@@ -85,4 +86,6 @@ void GLWindow::paintGL()
 {
     makeCurrent();
     glClear(GL_COLOR_BUFFER_BIT);
+
+    // 
 }

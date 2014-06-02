@@ -39,6 +39,7 @@ public:
 	void setPosition(Vector2);
 	Vector2 getSpeed() const;
 	void setSpeed(Vector2);
+	float getRadius() const;
 
 	std::string getName() const;
 	void setName(std::string);

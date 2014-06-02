@@ -1,5 +1,6 @@
 // Copyright (C) 2014 Team306
 
+#include <fstream>
 #include "Referee.h"
 
 Referee::Referee()
@@ -13,8 +14,19 @@ Referee::~Referee()
 
 void Referee::init()
 {
-	// read file or use lua script
-	ballRadius = 30;
+	// read config file
+	std::ifstream fin;
+	fin.open("config.txt");
+	std::string str;
+	while (fin >> str)
+	{
+		if (str == "ballRadius")
+		{
+			break;
+		}
+	}
+	fin >> ballRadius;
+	fin.close();
 }
 
 void Referee::chooseRule(std::string ruleName)
@@ -25,40 +37,64 @@ void Referee::chooseRule(std::string ruleName)
 std::vector<Ball> Referee::getBallsList() const
 {
 	// use rule here
-
-	// just for test
-	QColor kagamine_iro(255, 252, 0);
+	// read the file get config info
+	std::ifstream fin;
+	fin.open("config.txt");
+	std::string str;
+	while (fin >> str)
+	{
+		if (str == "ballsList")
+		{
+			break;
+		}
+	}
+	int number;
+	fin >> number;
 	std::vector<Ball> ballsList;
-	
-	Ball ball = Ball(Vector2(150, 150), ballRadius);
-	ball.setColor(QColor(kagamine_iro));
-	ballsList.push_back(ball);
-	
-	ball = Ball(Vector2(130, 490), ballRadius);
-	ball.setColor(QColor(kagamine_iro));
-	ballsList.push_back(ball);
-	
-	ball = Ball(Vector2(530, 590), ballRadius);
-	ball.setColor(QColor(kagamine_iro));
-	ballsList.push_back(ball);
-	
-	ball = Ball(Vector2(330, 290), ballRadius);
-	ball.setColor(QColor(kagamine_iro));
-	ballsList.push_back(ball);
-	
-	ball = Ball(Vector2(930, 470), ballRadius);
-	ball.setColor(QColor(kagamine_iro));
-	ballsList.push_back(ball);
-
+	for (int i = 0; i < number; ++i)
+	{
+		float x, y;
+		int R, G, B;
+		std::string name;
+		fin >> x;
+		fin >> y;
+		fin >> R;
+		fin >> G;
+		fin >> B;
+		fin >> name;
+		Ball ball = Ball(Vector2(x, y), ballRadius);
+		ball.setColor(QColor(R, G, B));
+		ball.setName(name);
+		ballsList.push_back(ball);
+	}
+	fin.close();
 	return ballsList;
 }
 
 Ball Referee::getCueBall() const
 {
-	Ball cueBall(Vector2(500, 500), ballRadius);
+	// read config file
+	std::ifstream fin;
+	fin.open("config.txt");
+	std::string str;
+	while (fin >> str)
+	{
+		if (str == "cueBall")
+		{
+			break;
+		}
+	}
+	float x, y;
+	int R, G, B;
+	fin >> x;
+	fin >> y;
+	fin >> R;
+	fin >> G;
+	fin >> B;
+	fin.close();
+	Ball cueBall(Vector2(x, y), ballRadius);
+	cueBall.setColor(QColor(R, G, B));
 	cueBall.setName("cueBall");
-	cueBall.setColor(QColor(255, 0, 255));
-
 	return cueBall;
 }
 
