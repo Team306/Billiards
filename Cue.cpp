@@ -1,6 +1,7 @@
 // Copyright (C) 2014 Team306
 
 #include "Cue.h"
+#include "Game.h"
 
 Cue::Cue()
 {
@@ -16,12 +17,13 @@ void Cue::init(Referee& referee)
 	cueLength = 50;
 }
 
-void Cue::Update(GAME_STATE gameState, Vector2 mousePosition)
+void Cue::Update(int gameState, Vector2 mousePosition)
 {
 	// Update here
-	switch (gameState)
+	switch ((GAME_STATE)gameState)
 	{
 		case WAIT_FOR_STROKE:
+		case FREE_BALL:
 			this->mousePosition = mousePosition;
 			break;
 	}

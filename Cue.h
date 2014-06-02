@@ -6,7 +6,6 @@
 
 #include "Vector2.h"
 #include "Referee.h"
-#include "Game.h"
 
 // user controls it
 class Cue
@@ -25,7 +24,7 @@ public:
 	void init(Referee &);
 
 	// update and draw
-	void Update(GAME_STATE gameState, Vector2 mousePosition);
+    void Update(int gameState, Vector2 mousePosition);
 	void Draw(QPainter &, Ball& cueBall);	
 
 	void Stroke(int elapsed, Ball& cueBall);
