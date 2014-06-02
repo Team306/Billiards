@@ -50,6 +50,9 @@ void Table::Draw(QPainter& painter)
     painter.setPen(QPen(QColor(0, 0, 255)));
     painter.setBrush(QBrush(QColor(0, 255, 0)));
     painter.drawRoundRect(QRectF(position.getX(), position.getY(), size.getX(), size.getY()),7,14);
+
+    painter.setPen(QPen(QColor(255,255,255)));
+    painter.drawLine(position.getX()+300,position.getY(),position.getX()+300,position.getY()+size.getY());
 }
 
 // collision detection
