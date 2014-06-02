@@ -30,6 +30,8 @@ public:
 
 	// get and set
 	Ball& getCueBall();
+
+	bool isRunning() const;
 };
 
 

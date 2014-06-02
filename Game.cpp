@@ -40,6 +40,12 @@ void Game::Update()
 			// just put the cue ball in the center of the kitchen(free ball area)
 			// use TABLE method
 			break;
+		case BALL_IS_RUNNING:
+			if (!ballsManager.isRunning())
+			{
+				gameState = WAIT_FOR_STROKE;
+			}
+			break;
 	}
 }
 

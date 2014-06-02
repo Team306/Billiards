@@ -36,6 +36,8 @@ void BallsManager::Update(Table& table)
     {
     	// change speed or sth else
 
+    	// test
+    	cueBall.setSpeed(Vector2());
     }
     for (unsigned i = 0; i < ballsList.size(); ++i)
     {
@@ -43,7 +45,9 @@ void BallsManager::Update(Table& table)
 		if (cueBall.collidesWith(ballsList[i]))
 		{
 			// change speed or sth else
-
+			
+			// test
+	    	cueBall.setSpeed(Vector2());
 		}
 
 		// and then detect the balls with table
@@ -79,4 +83,25 @@ void BallsManager::Draw(QPainter& painter)
 Ball& BallsManager::getCueBall()
 {
 	return cueBall;
+}
+
+bool BallsManager::isRunning() const
+{
+	int flag = 0;
+	for (int i = 0; i < ballsList.size(); ++i)
+	{
+		if (ballsList[i].getBallState() == RUNNING)
+		{
+			flag = 1;
+		}
+	}
+	if (cueBall.getBallState() == RUNNING)
+	{
+		flag = 1;
+	}
+	if (flag == 0)
+	{
+		return false;
+	}
+	return true;
 }

@@ -39,11 +39,24 @@ Vector2 Ball::getSpeed() const
 void Ball::setSpeed(Vector2 v)
 {
 	speed = v;
+	if (speed.getX() > 0 || speed.getY() > 0)
+	{
+		ballState = RUNNING;
+	}
+	else
+	{
+		ballState = STILL;
+	}
 }
 
 float Ball::getRadius() const
 {
 	return radius;
+}
+
+int Ball::getBallState() const
+{
+	return ballState;
 }
 
 std::string Ball::getName() const
