@@ -46,4 +46,5 @@ void Cue::Draw(QPainter& painter, Ball& cueBall)
 void Cue::Stroke(int elapsed, Ball& cueBall)
 {
 	// 
+    cueBall.setSpeed(Vector2(15,15));
 }

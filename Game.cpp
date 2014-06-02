@@ -34,7 +34,8 @@ void Game::Update()
 	{
 		case FREE_BALL:
 			// check before set position
-			ballsManager.getCueBall().setPosition(mousePosition);
+            if(table.positionIsLegal(mousePosition,referee))
+                ballsManager.getCueBall().setPosition(mousePosition);
 			// chech if the position is legal
 			// if the position is illegal 
 			// just put the cue ball in the center of the kitchen(free ball area)
