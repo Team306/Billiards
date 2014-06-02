@@ -39,7 +39,11 @@ public:
 	void setPosition(Vector2);
 	Vector2 getSpeed() const;
 	void setSpeed(Vector2);
+<<<<<<< HEAD
     float getRadius() const;
+=======
+	float getRadius() const;
+>>>>>>> a2e8a2b2f8212b1bd2b77d3ed5e05a54e2b1e358
 
 	std::string getName() const;
 	void setName(std::string);
