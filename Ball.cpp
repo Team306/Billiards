@@ -43,11 +43,7 @@ void Ball::setSpeed(Vector2 v)
 
 float Ball::getRadius() const
 {
-<<<<<<< HEAD
-    return radius;
-=======
 	return radius;
->>>>>>> a2e8a2b2f8212b1bd2b77d3ed5e05a54e2b1e358
 }
 
 std::string Ball::getName() const
