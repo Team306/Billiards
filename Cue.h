@@ -6,12 +6,13 @@
 
 #include "Vector2.h"
 #include "Referee.h"
+#include "Game.h"
 
 // user controls it
 class Cue
 {
 private:
-	Vector2 position; // the position the cue points to
+	Vector2 mousePosition; // update each main loop
 	// the position of the cue-ball 
 	float ballRadius;
 	float cueLength;
@@ -24,8 +25,10 @@ public:
 	void init(Referee &);
 
 	// update and draw
-	void Update();
-	void Draw(QPainter &, Vector2, Ball &);	
+	void Update(GAME_STATE gameState, Vector2 mousePosition);
+	void Draw(QPainter &, Ball& cueBall);	
+
+	void Stroke(int elapsed, Ball& cueBall);
 };
 
 

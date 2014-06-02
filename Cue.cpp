@@ -16,13 +16,18 @@ void Cue::init(Referee& referee)
 	cueLength = 50;
 }
 
-void Cue::Update()
+void Cue::Update(GAME_STATE gameState, Vector2 mousePosition)
 {
 	// Update here
-
+	switch (gameState)
+	{
+		case WAIT_FOR_STROKE:
+			this->mousePosition = mousePosition;
+			break;
+	}
 }
 
-void Cue::Draw(QPainter& painter, Vector2 mousePosition, Ball& cueBall)
+void Cue::Draw(QPainter& painter, Ball& cueBall)
 {
 	// Draw here
 	QColor frontSightColor(255, 255, 255, 200);
@@ -34,4 +39,9 @@ void Cue::Draw(QPainter& painter, Vector2 mousePosition, Ball& cueBall)
     QColor lineColor(0, 0, 0);
     painter.setPen(lineColor);
 	painter.drawLine(cuePosition.getX(), cuePosition.getY(), mousePosition.getX(), mousePosition.getY());
+}
+
+void Cue::Stroke(int elapsed, Ball& cueBall)
+{
+	// 
 }

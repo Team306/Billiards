@@ -55,7 +55,14 @@ void GLWindow::initializeGL()
 
 void GLWindow::mousePressEvent(QMouseEvent *event)
 {
-	// 
+    mousePressTime.start();
+}
+
+void GLWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+    int elapsedTime = mousePressTime.elapsed();
+    // call game method
+    game.mousePress(elapsedTime);
 }
 
 void GLWindow::mouseMoveEvent(QMouseEvent *event)
@@ -77,6 +84,19 @@ void GLWindow::paintEvent(QPaintEvent *event)
 void GLWindow::MainLoop()
 {
 	game.Update();
+    // change cursor
+    switch (game.getGameState())
+    {
+        case WAIT_FOR_STROKE:
+            setCursor(Qt::CrossCursor);
+            break;
+        case FREE_BALL:
+            setCursor(Qt::PointingHandCursor);
+            break;
+        case BALL_IS_RUNNING:
+            setCursor(Qt::BlankCursor);
+            break;
+    }
 	// call repaint
     update();
     // updateGL();

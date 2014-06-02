@@ -6,6 +6,7 @@
 
 #include <QGLWidget>
 #include <QTimer>
+#include <QTIme>
 #include "Game.h"
 
 class GLWindow : public QGLWidget
@@ -23,6 +24,7 @@ protected:
     void paintGL();
 	void paintEvent(QPaintEvent *event);
 	void mousePressEvent(QMouseEvent *event);
+	void mouseReleaseEvent(QMouseEvent *event);
 	void mouseMoveEvent(QMouseEvent *event);
 
 private slots:
@@ -32,6 +34,7 @@ private:
 	Game game;
 
 	QTimer timer;
+	QTime mousePressTime;
 };
 
 

@@ -47,6 +47,14 @@ Vector2 Vector2::operator-(Vector2& v) const
 	return result;
 }
 
+Vector2 Vector2::operator*(float scale) const
+{
+	Vector2 result = *this;
+	result.x *= scale;
+	result.y *= scale;
+	return result;
+}
+
 float Vector2::dotProduct(Vector2& v) const
 {
 	float result = this->x * v.x + this->y * v.y;

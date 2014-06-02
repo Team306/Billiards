@@ -29,6 +29,9 @@ private:
 	// Game state
 	GAME_STATE gameState;
 
+	// debug variables
+	int elapsedTime;
+
 public:
 	Game();
 	~Game();
@@ -41,7 +44,9 @@ public:
 
 	// deal with mouse event
 	void setMousePosition(Vector2);
+	void mousePress(int elapsed);
 
+	GAME_STATE getGameState() const;
 };
 
 

@@ -22,6 +22,7 @@ public:
 	// override operators
     Vector2 operator+(Vector2 &) const;
     Vector2 operator-(Vector2 &) const;
+    Vector2 operator*(float) const;
     float dotProduct(Vector2 &) const;
 	// Vector2 crossProduct(Vector2 &);
 
