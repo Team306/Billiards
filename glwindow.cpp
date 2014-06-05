@@ -20,7 +20,7 @@ GLWindow::GLWindow(QWidget *parent)
 	connect(&timer, SIGNAL(timeout()), this, SLOT(MainLoop()));
 	timer.start(msPerFrame);
 
-	setFixedSize(1280, 720);
+    setFixedSize(1240, 720);
     setWindowTitle(tr("Billiards by Team306"));
 
     // put the window in center
@@ -83,7 +83,10 @@ void GLWindow::paintEvent(QPaintEvent *event)
 
 void GLWindow::MainLoop()
 {
-	game.Update();
+    for (int i = 0; i < 15; ++i)
+    {
+        game.Update();
+    }
     // change cursor
     switch (game.getGameState())
     {

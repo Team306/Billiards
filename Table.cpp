@@ -15,8 +15,8 @@ void Table::init(Referee& referee)
 	// init method
     picPosition.setXY(0, 0);
     position.setXY(40, 40);
-    picSize.setXY(1280, 680);
-    size.setXY(1200, 600);
+    picSize.setXY(1240, 720);
+    size.setXY(1160, 640);
     R1.setCoords(position.getX() + 40, position.getY(), position.getX() + size.getX() / 2 - 40,
                  position.getY() + referee.getBallRadius());
 
@@ -84,37 +84,37 @@ void Table::Draw(QPainter& painter)
 bool Table::collidesWith(Ball& b)
 {
 	// detect collision here
-    if(R1.contains(b.getPosition().getX(),b.getPosition().getY(),true))
+    if(R1.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
         b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
-    if(R2.contains(b.getPosition().getX(),b.getPosition().getY(),true))
+    if(R2.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
         b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
-    if(R3.contains(b.getPosition().getX(),b.getPosition().getY(),true))
+    if(R3.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
         b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
-    if(R4.contains(b.getPosition().getX(),b.getPosition().getY(),true))
+    if(R4.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
         b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
-    if(R5.contains(b.getPosition().getX(),b.getPosition().getY(),true))
+    if(R5.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
         b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
         return true;
     }
 
-    if(R6.contains(b.getPosition().getX(),b.getPosition().getY(),true))
+    if(R6.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
         b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
         return true;

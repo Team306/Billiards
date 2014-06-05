@@ -49,10 +49,10 @@ void Cue::Stroke(int elapsed, Ball& cueBall)
 	// use elapsed to calc the speed
 	Vector2 cuePosition = cueBall.getPosition();
 	Vector2 speed = mousePosition - cuePosition;
-	float scale = (float)elapsed / 30;
-	if (scale > 15)
+    float scale = (float)elapsed / 1000;
+    if (scale > 1)
 	{
-		scale = 15;
+        scale = 1;
 	}
 	speed = speed.getNormalize() * scale;
 	cueBall.setSpeed(speed);
