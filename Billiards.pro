@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     Table.cpp \
     glwindow.cpp \
     Referee.cpp \
-    Cue.cpp
+    Cue.cpp \
+    Player.cpp
 
 HEADERS  += \
     Ball.h \
@@ -31,4 +32,5 @@ HEADERS  += \
     Vector2.h \
     Table.h \
     glwindow.h \
-    Referee.h
+    Referee.h \
+    Player.h

@@ -93,8 +93,8 @@ void Game::mousePress(int elapsed)
 			gameState = WAIT_FOR_STROKE;
 			break;
 		case WAIT_FOR_STROKE:
-			gameState = BALL_IS_RUNNING;
-			cue.Stroke(elapsed, ballsManager.getCueBall());
+            cue.Stroke(elapsed, ballsManager.getCueBall());
+            gameState = BALL_IS_RUNNING;
 			break;
         case BALL_IS_RUNNING:
             break;
