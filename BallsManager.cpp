@@ -69,13 +69,20 @@ void BallsManager::Update(Table& table, Referee& referee)
     }
 
     // after detect collision, check if the ball is into the pocket
+    if (table.checkPockets(cueBall))
+    {
+    	// call the referee, and next turn game change to free ball
+    	
+    }
     for (unsigned i = 0; i < ballsList.size(); ++i)
     {
     	if (table.checkPockets(ballsList[i]))
     	{
-    		ballsList[i].setBallState(ON_THE_POCKET);
+    		// if ball is into the pocket, delete the ball
+    		ballsList[i] = ballsList[ballsList.size() - 1];
+    		ballsList.pop_back();
     		// call the referee
-    		
+
     	}
     }
 
