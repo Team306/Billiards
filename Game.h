@@ -37,8 +37,10 @@ private:
 	Referee referee;
 	Cue cue;
 	Vector2 mousePosition;
-	// Player player1;
-	// Player player2;
+    Player player1;
+    Player player2;
+    Player *current_player;
+
 
 	// Game state
 	GAME_STATE gameState;

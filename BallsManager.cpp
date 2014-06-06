@@ -22,7 +22,7 @@ void BallsManager::reset(Referee& referee)
 	// reset and init maybe the same
 }
 
-void BallsManager::Update(Table& table, Referee& referee)
+void BallsManager::Update(Table& table, Player *currentplayer)
 {
 	// Update each ball
     cueBall.Update();
@@ -45,7 +45,11 @@ void BallsManager::Update(Table& table, Referee& referee)
     	// first detect cue ball
 		if (cueBall.collidesWith(ballsList[i]))
 		{
-			// change speed or sth else
+            if(currentplayer->getHitflag() == 0 ){
+                currentplayer->setHitflag(1);
+                currentplayer->setFirsthit(ballsList[i].getName());
+            }
+            // change speed or sth else
 			
 			// test
 
@@ -76,14 +80,31 @@ void BallsManager::Update(Table& table, Referee& referee)
     if (table.checkPockets(cueBall))
     {
     	// call the referee, and next turn game change to free ball
+        //cueBall.setSpeed(Vector2((0 - cueBall.getSpeed().getX()), (0 - cueBall.getSpeed().getY())));
         // cueBall.setSpeed(Vector2((0 - cueBall.getSpeed().getX()), (0 - cueBall.getSpeed().getY())));
         cueBall.setSpeed(Vector2(0, 0));
+        currentplayer->setCueball_in(1);
     }
     for (unsigned i = 0; i < ballsList.size(); ++i)
     {
     	if (table.checkPockets(ballsList[i]))
     	{
     		// if ball is into the pocket, delete the ball
+            currentplayer->setOnpocketlist(ballsList[i].getName());
+            if(currentplayer->getBalltype() == NOTDEF){
+                if(ballsList[i].getName() == "one" || ballsList[i].getName() == "two" || ballsList[i].getName() == "three"
+                        || ballsList[i].getName() == "four"||ballsList[i].getName() == "five" ||ballsList[i].getName() == "six" ||ballsList[i].getName() == "seven"){
+                    currentplayer->setBalltype(SMALL);
+                }
+                else{
+                    if(ballsList[i].getName() == "eight"){
+
+                    }
+                    else{
+                       currentplayer->setBalltype(BIG);
+                    }
+                }
+            }
     		ballsList[i] = ballsList[ballsList.size() - 1];
     		ballsList.pop_back();
     		// call the referee
