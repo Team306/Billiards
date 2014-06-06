@@ -85,14 +85,14 @@ void Table::Draw(QPainter& painter)
     painter.drawLine(position.getX()+300,position.getY(),position.getX()+300,position.getY()+size.getY());
     //test
     painter.setBrush(QBrush(QColor(100,100,100)));
-    painter.drawRect(R1);
+    /*painter.drawRect(R1);
     painter.drawRect(R2);
     painter.drawRect(R3);
     painter.drawRect(R4);
     painter.drawRect(R5);
     painter.drawRect(R6);
     painter.drawRect(R7);
-    painter.drawRect(R8);
+    painter.drawRect(R8);*/
 }
 
 // collision detection
@@ -156,12 +156,12 @@ bool Table::collidesWith(Ball& b)
     Vector2 detectP4(position.getX() + size.getX() / 2 + pocketRadius, position.getY());//right
     if(b.getPosition().distanceBetween(detectP3) <= b.getRadius())
     {
-        b.setSpeed(Vector2(0 - b.getSpeed().getY(),b.getSpeed().getX()));
+        b.setSpeed(Vector2(b.getSpeed().getY(), 0 - b.getSpeed().getX()));
         return true;
     }
     if(b.getPosition().distanceBetween(detectP4) <= b.getRadius())
     {
-        b.setSpeed(Vector2(b.getSpeed().getY(), 0 - b.getSpeed().getX()));
+        b.setSpeed(Vector2(0 - b.getSpeed().getY(),b.getSpeed().getX()));
         return true;
     }
 
