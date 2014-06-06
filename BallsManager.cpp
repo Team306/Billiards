@@ -37,7 +37,7 @@ void BallsManager::Update(Table& table, Referee& referee)
     	// change speed or sth else
 
     	// test
-        //cueBall.setSpeed(Vector2());
+        // cueBall.setSpeed(Vector2());
     }
     for (unsigned i = 0; i < ballsList.size(); ++i)
     {
@@ -47,7 +47,7 @@ void BallsManager::Update(Table& table, Referee& referee)
 			// change speed or sth else
 			
 			// test
-            //cueBall.setSpeed(Vector2());
+            // cueBall.setSpeed(Vector2());
 		}
 
 		// and then detect the balls with table
@@ -72,7 +72,8 @@ void BallsManager::Update(Table& table, Referee& referee)
     if (table.checkPockets(cueBall))
     {
     	// call the referee, and next turn game change to free ball
-    	
+        //cueBall.setSpeed(Vector2((0 - cueBall.getSpeed().getX()), (0 - cueBall.getSpeed().getY())));
+        cueBall.setSpeed(Vector2(0, 0));
     }
     for (unsigned i = 0; i < ballsList.size(); ++i)
     {

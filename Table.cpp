@@ -101,37 +101,43 @@ bool Table::collidesWith(Ball& b)
 	// detect collision here
     if(R1.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
+        if(b.getSpeed().getY() < 0)
+            b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
     if(R2.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
+        if(b.getSpeed().getY() < 0)
+            b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
     if(R3.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
+        if(b.getSpeed().getY() > 0)
+            b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
     if(R4.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
+        if(b.getSpeed().getY() > 0)
+            b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
     if(R5.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
+        if(b.getSpeed().getX() < 0)
+            b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
         return true;
     }
 
     if(R6.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
+        if(b.getSpeed().getX() > 0)
+            b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
         return true;
     }
 
@@ -151,13 +157,13 @@ bool Table::checkPockets(Ball& ball)
 {
     // if the ball is in the pocket return true;
     if(R7.contains(ball.getPosition().getX(), ball.getPosition().getY(), false)||
-            R6.contains(ball.getPosition().getX(), ball.getPosition().getY(), false))
+            R8.contains(ball.getPosition().getX(), ball.getPosition().getY(), false))
         return true;
 
-    if((ball.getPosition().distanceBetween(position) <= 0.705 * pocketRadius )||
-            (ball.getPosition().distanceBetween(p1) <= 0.705 * pocketRadius )||
-            (ball.getPosition().distanceBetween(p2) <= 0.705 * pocketRadius )||
-            (ball.getPosition().distanceBetween(p3) <= 0.705 * pocketRadius ))
+    if((ball.getPosition().distanceBetween(position) <= 0.5 * pocketRadius )||
+            (ball.getPosition().distanceBetween(p1) <= 0.5 * pocketRadius )||
+            (ball.getPosition().distanceBetween(p2) <= 0.5 * pocketRadius )||
+            (ball.getPosition().distanceBetween(p3) <= 0.5 * pocketRadius ))
         return true;
     return false;
 }
