@@ -76,7 +76,7 @@ void BallsManager::Update(Table& table, Referee& referee)
     if (table.checkPockets(cueBall))
     {
     	// call the referee, and next turn game change to free ball
-        //cueBall.setSpeed(Vector2((0 - cueBall.getSpeed().getX()), (0 - cueBall.getSpeed().getY())));
+        // cueBall.setSpeed(Vector2((0 - cueBall.getSpeed().getX()), (0 - cueBall.getSpeed().getY())));
         cueBall.setSpeed(Vector2(0, 0));
     }
     for (unsigned i = 0; i < ballsList.size(); ++i)

@@ -24,23 +24,23 @@ void Table::init(Referee& referee)
     p3.setXY(position.getX() + size.getX(), position.getY() + size.getY());
 
     //R1 to R6 is used to detect crash
-    R1.setCoords(position.getX() + 35, position.getY(), position.getX() + size.getX() / 2 - 35,
+    R1.setCoords(position.getX() + pocketRadius, position.getY(), position.getX() + size.getX() / 2 - pocketRadius,
                  position.getY() + referee.getBallRadius());//topleft
 
-    R2.setCoords(position.getX() + size.getX() / 2 + 35, position.getY(), position.getX() + size.getX() - 35,
-                 position.getY() + referee.getBallRadius());//topright
+    R2.setCoords(position.getX() + size.getX() / 2 + pocketRadius, position.getY(),
+                 position.getX() + size.getX() - pocketRadius,position.getY() + referee.getBallRadius());//topright
 
-    R3.setCoords(position.getX() + 35, position.getY() + size.getY() - referee.getBallRadius(),
-                 position.getX() + size.getX() / 2 - 35, position.getY() + size.getY());//bottomleft
+    R3.setCoords(position.getX() + pocketRadius, position.getY() + size.getY() - referee.getBallRadius(),
+                 position.getX() + size.getX() / 2 - pocketRadius, position.getY() + size.getY());//bottomleft
 
-    R4.setCoords(position.getX() + size.getX() / 2  + 35, position.getY() + size.getY() - referee.getBallRadius(),
-                 position.getX() + size.getX() - 35,position.getY() + size.getY());//bottomright
+    R4.setCoords(position.getX() + size.getX() / 2  + pocketRadius, position.getY() + size.getY() - referee.getBallRadius(),
+                 position.getX() + size.getX() - pocketRadius,position.getY() + size.getY());//bottomright
 
-    R5.setCoords(position.getX(), position.getY() + 35, position.getX() + referee.getBallRadius(),
-                 position.getY() + size.getY() - 35);//left
+    R5.setCoords(position.getX(), position.getY() + pocketRadius, position.getX() + referee.getBallRadius(),
+                 position.getY() + size.getY() - pocketRadius);//left
 
-    R6.setCoords(position.getX() + size.getX() - referee.getBallRadius(), position.getY() + 35,
-                 position.getX() + size.getX(),position.getY() + size.getY() - 35);//right
+    R6.setCoords(position.getX() + size.getX() - referee.getBallRadius(), position.getY() + pocketRadius,
+                 position.getX() + size.getX(),position.getY() + size.getY() - pocketRadius);//right
     //R7 to R8 middle pocket
     R7.setCoords(position.getX() + size.getX() / 2 - 30,position.getY() - referee.getBallRadius(),
                  position.getX() + size.getX() / 2 + 30,position.getY());
@@ -63,7 +63,7 @@ void Table::Update()
 void Table::Draw(QPainter& painter)
 {
 	// draw here
-    QColor blue_iro(66, 204, 255);
+    QColor blue_iro(91, 29, 28);
     painter.setBrush(QBrush(blue_iro));
     painter.setPen(QPen(QColor(0, 0, 255)));
 	painter.drawRect(QRectF(picPosition.getX(), picPosition.getY(), picSize.getX(), picSize.getY()));
@@ -78,13 +78,13 @@ void Table::Draw(QPainter& painter)
     painter.drawEllipse(QPoint(picPosition.getX()+picSize.getX()/2, picPosition.getY()+size.getY()+40),40,40);
 
     painter.setPen(QPen(QColor(0, 0, 255)));
-    painter.setBrush(QBrush(QColor(0, 255, 0)));
+    painter.setBrush(QBrush(QColor(68, 149, 60)));
     painter.drawRoundRect(QRectF(position.getX(), position.getY(), size.getX(), size.getY()),7,14);
 
     painter.setPen(QPen(QColor(255,255,255)));
     painter.drawLine(position.getX()+300,position.getY(),position.getX()+300,position.getY()+size.getY());
     //test
-    /*painter.setBrush(QBrush(QColor(100,100,100)));
+    painter.setBrush(QBrush(QColor(100,100,100)));
     painter.drawRect(R1);
     painter.drawRect(R2);
     painter.drawRect(R3);
@@ -92,52 +92,132 @@ void Table::Draw(QPainter& painter)
     painter.drawRect(R5);
     painter.drawRect(R6);
     painter.drawRect(R7);
-    painter.drawRect(R8);*/
+    painter.drawRect(R8);
 }
 
 // collision detection
 bool Table::collidesWith(Ball& b)
 {
 	// detect collision here
-    if(R1.contains(b.getPosition().getX(),b.getPosition().getY(),false))
+    // speed is for test
+    if(R1.contains(b.getPosition().getX(),b.getPosition().getY(),false))//topleft
     {
         if(b.getSpeed().getY() < 0)
             b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
-
-    if(R2.contains(b.getPosition().getX(),b.getPosition().getY(),false))
+    if(R2.contains(b.getPosition().getX(),b.getPosition().getY(),false))//topright
     {
         if(b.getSpeed().getY() < 0)
             b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
-
-    if(R3.contains(b.getPosition().getX(),b.getPosition().getY(),false))
+    if(R3.contains(b.getPosition().getX(),b.getPosition().getY(),false))//bottomleft
     {
         if(b.getSpeed().getY() > 0)
             b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
-
-    if(R4.contains(b.getPosition().getX(),b.getPosition().getY(),false))
+    if(R4.contains(b.getPosition().getX(),b.getPosition().getY(),false))//topright
     {
         if(b.getSpeed().getY() > 0)
             b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
-
-    if(R5.contains(b.getPosition().getX(),b.getPosition().getY(),false))
+    if(R5.contains(b.getPosition().getX(),b.getPosition().getY(),false))//left
     {
         if(b.getSpeed().getX() < 0)
             b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
         return true;
     }
-
-    if(R6.contains(b.getPosition().getX(),b.getPosition().getY(),false))
+    if(R6.contains(b.getPosition().getX(),b.getPosition().getY(),false))//right
     {
         if(b.getSpeed().getX() > 0)
             b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
+        return true;
+    }
+
+    //topleft_pocket,2 points
+    Vector2 detectP1(position.getX() + pocketRadius, position.getY());//top
+    Vector2 detectP2(position.getX(), position.getY() + pocketRadius);//left
+    if(b.getPosition().distanceBetween(detectP1) <= b.getRadius())
+    {
+        b.setSpeed(Vector2(b.getSpeed().getY(), 0 - b.getSpeed().getX()));
+        return true;
+    }
+    if(b.getPosition().distanceBetween(detectP2) <= b.getRadius())
+    {
+        b.setSpeed(Vector2( 0 - b.getSpeed().getY(), b.getSpeed().getX()));
+        return true;
+    }
+
+    //topcenter_pocket, 2 points
+    Vector2 detectP3(position.getX() + size.getX() / 2 - pocketRadius, position.getY());//left
+    Vector2 detectP4(position.getX() + size.getX() / 2 + pocketRadius, position.getY());//right
+    if(b.getPosition().distanceBetween(detectP3) <= b.getRadius())
+    {
+        b.setSpeed(Vector2(0 - b.getSpeed().getY(),b.getSpeed().getX()));
+        return true;
+    }
+    if(b.getPosition().distanceBetween(detectP4) <= b.getRadius())
+    {
+        b.setSpeed(Vector2(b.getSpeed().getY(), 0 - b.getSpeed().getX()));
+        return true;
+    }
+
+    //topright_pocket, 2 points
+    Vector2 detectP5(position.getX() +size.getX() - pocketRadius, position.getY());//top
+    Vector2 detectP6(position.getX() +size.getX(), position.getY() + pocketRadius);//left
+    if(b.getPosition().distanceBetween(detectP5) <= b.getRadius())
+    {
+        b.setSpeed(Vector2(b.getSpeed().getY(), 0 - b.getSpeed().getX()));
+        return true;
+    }
+    if(b.getPosition().distanceBetween(detectP6) <= b.getRadius())
+    {
+        b.setSpeed(Vector2( 0 - b.getSpeed().getY(), b.getSpeed().getX()));
+        return true;
+    }
+
+    //bottomleft_pocket, 2 points
+    Vector2 detectP7(position.getX() + pocketRadius, position.getY());//bottom
+    Vector2 detectP8(position.getX(), position.getY() + size.getY() - pocketRadius);//left
+    if(b.getPosition().distanceBetween(detectP7) <= b.getRadius())
+    {
+        b.setSpeed(Vector2(b.getSpeed().getY(), 0 - b.getSpeed().getX()));
+        return true;
+    }
+    if(b.getPosition().distanceBetween(detectP8) <= b.getRadius())
+    {
+        b.setSpeed(Vector2( 0 - b.getSpeed().getY(), b.getSpeed().getX()));
+        return true;
+    }
+
+    //bottomcenter_pocket, 2 points
+    Vector2 detectP9(position.getX() + size.getX() / 2 + pocketRadius, position.getY() + size.getY());//right
+    Vector2 detectP10(position.getX() + size.getX() / 2 - pocketRadius, position.getY() + size.getY());//left
+    if(b.getPosition().distanceBetween(detectP9) <= b.getRadius())
+    {
+        b.setSpeed(Vector2(0 - b.getSpeed().getY(),b.getSpeed().getX()));
+        return true;
+    }
+    if(b.getPosition().distanceBetween(detectP10) <= b.getRadius())
+    {
+        b.setSpeed(Vector2(b.getSpeed().getY(), 0 - b.getSpeed().getX()));
+        return true;
+    }
+
+    //bottomright_pocket, 2 points
+    Vector2 detectP11(position.getX() +size.getX(), position.getY() + size.getY() - pocketRadius);//right
+    Vector2 detectP12(position.getX() +size.getX() - pocketRadius, position.getY() + size.getY());//bottom
+    if(b.getPosition().distanceBetween(detectP11) <= b.getRadius())
+    {
+        b.setSpeed(Vector2(b.getSpeed().getY(), 0 - b.getSpeed().getX()));
+        return true;
+    }
+    if(b.getPosition().distanceBetween(detectP12) <= b.getRadius())
+    {
+        b.setSpeed(Vector2( 0 - b.getSpeed().getY(), b.getSpeed().getX()));
         return true;
     }
 

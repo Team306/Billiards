@@ -98,7 +98,7 @@ void Ball::Draw(QPainter& painter)
 	// draw itself
 	QRadialGradient gradient(QPointF(radius, radius), radius, QPointF(radius * 0.5, radius * 0.5));
 	gradient.setColorAt(0, QColor(255, 255, 255, 255));
-	gradient.setColorAt(0.1, QColor(255, 255, 255));
+    gradient.setColorAt(0.05, QColor(255, 255, 255));
 	gradient.setColorAt(1, color);
 
 	painter.save();
