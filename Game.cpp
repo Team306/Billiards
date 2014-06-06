@@ -1,6 +1,7 @@
 // Copyright (C) 2014 Team306
 
 #include "Game.h"
+#include <iostream>
 
 Game::Game()
 {
@@ -9,6 +10,11 @@ Game::Game()
 	gameState = FREE_BALL;
 	// gameState = BALL_IS_RUNNING;
 	elapsedTime = 0;
+    player1.init();
+    player2.init();
+    player1.setPlayerflag(LOCAL);
+    player2.setPlayerflag(GUEST);
+    current_player = &player1;
 }
 
 Game::~Game()
@@ -28,7 +34,26 @@ void Game::Update()
 {
 	// update
 	cue.Update(gameState, mousePosition);
-	ballsManager.Update(table, referee);
+    ballsManager.Update(table, current_player);
+
+    if(player1.getBalltype() == NOTDEF || player2.getBalltype() == NOTDEF){
+        if(current_player->getBalltype() == SMALL){
+            if(current_player->getPlayerflag() == LOCAL){
+                player2.setBalltype(BIG);
+            }
+            else player1.setBalltype(BIG);
+        }
+        else{
+            if(current_player->getBalltype() == BIG){
+                if(current_player->getPlayerflag() == LOCAL){
+                    player2.setBalltype(SMALL);
+                }
+                else player1.setBalltype(SMALL);
+            }
+        }
+    }
+
+
 
 	switch (gameState)
 	{
@@ -44,7 +69,19 @@ void Game::Update()
 		case BALL_IS_RUNNING:
 			if (!ballsManager.isRunning())
 			{
-				gameState = WAIT_FOR_STROKE;
+                if(current_player->getCueball_in()){
+                    gameState = FREE_BALL;
+                    if(current_player->getPlayerflag() == LOCAL){
+                        current_player->update();
+                        current_player = &player2;
+                        break;
+                    }
+                    else{
+                        current_player->update();
+                        current_player = &player1;
+                    }
+                }
+                gameState = WAIT_FOR_STROKE;
 				// call the referee
 			}
 			break;
@@ -75,6 +112,8 @@ void Game::Draw(QPainter& painter)
     // debug info
     painter.drawText(QRectF(420, 535, 250, 25), "mouse press elapsed time");
     painter.drawText(QRectF(580, 535, 50, 25), QString::number(elapsedTime));
+    painter.drawText(QRectF(200,535,100,100),QString::number(current_player->getPlayerflag()));
+    //std::cout<<getPlayerflag()<<std::endl;
 }
 
 void Game::setMousePosition(Vector2 position)
