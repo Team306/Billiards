@@ -37,6 +37,9 @@ public:
 	// collision detection
 	bool collidesWith(Ball &);
     bool positionIsLegal(Vector2 ,Referee &);
+
+    // check if the ball is into the pocket
+    bool checkPockets(Ball &);
 };
 
 

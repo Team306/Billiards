@@ -28,7 +28,7 @@ void Game::Update()
 {
 	// update
 	cue.Update(gameState, mousePosition);
-	ballsManager.Update(table);
+	ballsManager.Update(table, referee);
 
 	switch (gameState)
 	{
@@ -45,8 +45,12 @@ void Game::Update()
 			if (!ballsManager.isRunning())
 			{
 				gameState = WAIT_FOR_STROKE;
+				// call the referee
 			}
 			break;
+        case WAIT_FOR_STROKE:
+
+            break;
 	}
 }
 
@@ -62,6 +66,10 @@ void Game::Draw(QPainter& painter)
     	case WAIT_FOR_STROKE:
     		cue.Draw(painter, ballsManager.getCueBall());
     		break;
+        case FREE_BALL:
+            break;
+        case BALL_IS_RUNNING:
+            break;
     }
 
     // debug info
@@ -88,6 +96,8 @@ void Game::mousePress(int elapsed)
 			gameState = BALL_IS_RUNNING;
 			cue.Stroke(elapsed, ballsManager.getCueBall());
 			break;
+        case BALL_IS_RUNNING:
+            break;
 	}
 }
 

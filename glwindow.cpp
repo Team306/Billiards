@@ -12,6 +12,8 @@
 
 // fps
 const int msPerFrame = 16;
+// update times in each frame
+const int updateCount = 20;
 
 GLWindow::GLWindow(QWidget *parent)
 	: QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
@@ -83,7 +85,7 @@ void GLWindow::paintEvent(QPaintEvent *event)
 
 void GLWindow::MainLoop()
 {
-    for (int i = 0; i < 15; ++i)
+    for (int i = 0; i < updateCount; ++i)
     {
         game.Update();
     }

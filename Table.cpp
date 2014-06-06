@@ -131,3 +131,9 @@ bool Table::positionIsLegal(Vector2 p,Referee &referee)
         return true;
     return false;
 }
+
+bool Table::checkPockets(Ball& ball)
+{
+    // if the ball is in the pocket return true;
+    return false;
+}

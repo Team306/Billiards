@@ -22,7 +22,7 @@ void BallsManager::reset(Referee& referee)
 	// reset and init maybe the same
 }
 
-void BallsManager::Update(Table& table)
+void BallsManager::Update(Table& table, Referee& referee)
 {
 	// Update each ball
     cueBall.Update();
@@ -65,6 +65,17 @@ void BallsManager::Update(Table& table)
     			// change speed or sth else
 
     		}
+    	}
+    }
+
+    // after detect collision, check if the ball is into the pocket
+    for (unsigned i = 0; i < ballsList.size(); ++i)
+    {
+    	if (table.checkPockets(ballsList[i]))
+    	{
+    		ballsList[i].setBallState(ON_THE_POCKET);
+    		// call the referee
+    		
     	}
     }
 

@@ -41,6 +41,7 @@ public:
 	void setSpeed(Vector2);
 	float getRadius() const;
 	int getBallState() const;
+	void setBallState(int);
 
 	std::string getName() const;
 	void setName(std::string);

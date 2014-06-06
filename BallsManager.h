@@ -25,7 +25,7 @@ public:
 	void reset(Referee &); // reset all balls position
 
 	// update and draw
-	void Update(Table &);
+	void Update(Table &, Referee &);
 	void Draw(QPainter &);
 
 	// get and set

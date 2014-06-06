@@ -59,6 +59,11 @@ int Ball::getBallState() const
 	return ballState;
 }
 
+void Ball::setBallState(int newState)
+{
+	ballState = (BALL_STATE)newState;
+}
+
 std::string Ball::getName() const
 {
 	return name;
@@ -91,8 +96,20 @@ void Ball::Draw(QPainter& painter)
 	}
 
 	// draw itself
-	painter.setBrush(color);
-    painter.drawEllipse(QPoint(position.getX(), position.getY()), radius, radius);
+	QRadialGradient gradient(QPointF(radius, radius), radius, QPointF(radius * 0.5, radius * 0.5));
+	gradient.setColorAt(0, QColor(255, 255, 255, 255));
+	gradient.setColorAt(0.1, QColor(255, 255, 255));
+	gradient.setColorAt(1, color);
+
+	painter.save();
+	painter.translate(position.getX() - radius, position.getY() - radius);
+	painter.setBrush(QBrush(gradient));
+	painter.setPen(color);
+	painter.drawEllipse(0, 0, radius * 2, radius * 2);
+	painter.restore();
+
+	// painter.setBrush(color);
+    // painter.drawEllipse(QPoint(position.getX(), position.getY()), radius, radius);
 }
 
 // only return if 2 balls collide

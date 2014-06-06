@@ -6,7 +6,7 @@ ballRadius 23.44
 
 # first line is the number of balls
 # and then give each ball's info
-# each ball is X Y and R G B and ball name
+# each line is X Y and R G B and ball name
 
 ballsList
 15
@@ -29,4 +29,4 @@ ballsList
 # get cue ball info
 
 cueBall
-500 500 255 0 255
+240 360 255 0 255
