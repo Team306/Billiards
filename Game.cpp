@@ -76,6 +76,7 @@ void Game::Update()
                     else{
                         current_player->update();
                         current_player = &player1;
+                        break;
                     }
                 }
                 gameState = WAIT_FOR_STROKE;
