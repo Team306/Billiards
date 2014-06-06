@@ -8,6 +8,7 @@
 #include "Ball.h"
 #include "Referee.h"
 #include "Table.h"
+#include "Player.h"
 
 // detect all collisions in this class
 class BallsManager
@@ -25,7 +26,7 @@ public:
 	void reset(Referee &); // reset all balls position
 
 	// update and draw
-	void Update(Table &, Referee &);
+    void Update(Table &, Player *);
 	void Draw(QPainter &);
 
 	// get and set
