@@ -63,8 +63,8 @@ void Table::Update()
 void Table::Draw(QPainter& painter)
 {
 	// draw here
-    QColor blue_iro(91, 29, 28);
-    painter.setBrush(QBrush(blue_iro));
+    QColor brown(91, 29, 28);
+    painter.setBrush(QBrush(brown));
     painter.setPen(QPen(QColor(0, 0, 255)));
 	painter.drawRect(QRectF(picPosition.getX(), picPosition.getY(), picSize.getX(), picSize.getY()));
 

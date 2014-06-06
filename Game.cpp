@@ -69,27 +69,80 @@ void Game::Draw(QPainter& painter)
         case BALL_IS_RUNNING:
             break;
         case START_FRAME:
+            QColor gray(100, 100, 100, 200);
+            painter.setPen(gray);
+
+            QFont font("Consolas", 100, 100, false);
+            painter.setFont(font);
+            
+            painter.drawText(QRectF(108, 88, 1000, 250), "Billiards");
+
         	QColor miku_blue(00, 174, 255);
         	painter.setPen(miku_blue);
 
-        	QFont font("Consolas", 100, 100, false);
-        	painter.setFont(font);
+        	painter.drawText(QRectF(100, 80, 1000, 250), "Billiards");
 
-        	painter.drawText(QRectF(100, 100, 1000, 250), "Billiards");
+            if (QRect(420, 300, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
+            {
+                font.setPointSize(50);
+                font.setWeight(50);
+                painter.setFont(font);
+                painter.drawText(QRectF(360, 280, 500, 100), "Practice Mode");
+            }
+            else
+            {
+                font.setPointSize(30);
+                font.setWeight(30);            
+                painter.setFont(font);
+                painter.drawText(QRectF(420, 300, 350, 50), "Practice Mode");
+            }
+            
+            if (QRect(420, 400, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
+            {
+                font.setPointSize(50);
+                font.setWeight(50);
+                painter.setFont(font);
+                painter.drawText(QRectF(360, 380, 500, 100), "Versus Mode");
+            }
+            else
+            {
+                font.setPointSize(30);
+                font.setWeight(30);            
+                painter.setFont(font);
+                painter.drawText(QRectF(420, 400, 350, 50), "Versus Mode");
+            }
+            
+            if (QRect(420, 500, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
+            {
+                font.setPointSize(50);
+                font.setWeight(50);
+                painter.setFont(font);
+                painter.drawText(QRectF(360, 480, 500, 100), "Network Mode");
+            }
+            else
+            {
+                font.setPointSize(30);
+                font.setWeight(30);            
+                painter.setFont(font);
+                painter.drawText(QRectF(420, 500, 350, 50), "Network Mode");
+            }
+
+            font.setPointSize(12);
+            painter.setFont(font);
+            painter.drawText(QRectF(800, 600, 250, 25), "Copyright (C) 2014 Team306");
         	break;
     }
 
     // debug info
     QFont font;
     painter.setFont(font);
-    painter.drawText(QRectF(420, 535, 250, 25), "mouse press elapsed time");
-    painter.drawText(QRectF(580, 535, 50, 25), QString::number(elapsedTime));
+    painter.drawText(QRectF(420, 600, 250, 25), "mouse press elapsed time");
+    painter.drawText(QRectF(580, 600, 50, 25), QString::number(elapsedTime));
 }
 
 void Game::setMousePosition(Vector2 position)
 {
 	mousePosition = position;
-	// change text size below
 }
 
 void Game::mousePress(int elapsed)
@@ -110,7 +163,21 @@ void Game::mousePress(int elapsed)
             break;
         case START_FRAME:
         	// decide game mode
-        	gameState = FREE_BALL;
+            if (QRect(420, 300, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
+            {
+                gameState = FREE_BALL;
+                gameMode = PRACTICE_MODE;
+            }
+            if (QRect(420, 400, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
+            {
+                gameState = FREE_BALL;
+                gameMode = VERSUS_MODE;
+            }
+            if (QRect(420, 500, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
+            {
+                gameState = FREE_BALL;
+                gameMode = NETWORK_MODE;
+            }
         	break;
 	}
 }

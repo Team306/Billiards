@@ -42,7 +42,6 @@ private:
 
 	// Game state
 	GAME_STATE gameState;
-
 	// Game mode
 	GAME_MODE gameMode;
 
