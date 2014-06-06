@@ -22,11 +22,7 @@ public:
 
 	// init method
 	void init();
-<<<<<<< HEAD
 	void chooseRule(std::string ruleName);
-=======
-    void chooseRule(std::string ruleName);
->>>>>>> 240c69d4f8b75e53fe7893ee5916735db7ad69d5
 
 	// get rule
 	std::vector<Ball> getBallsList() const;
