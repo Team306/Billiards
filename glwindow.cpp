@@ -38,7 +38,7 @@ GLWindow::GLWindow(QWidget *parent)
 
     // about mouse event
     setMouseTracking(true);
-    setCursor(Qt::CrossCursor);
+    // setCursor(Qt::CrossCursor);
 }
 
 GLWindow::~GLWindow()
@@ -48,7 +48,7 @@ GLWindow::~GLWindow()
 void GLWindow::initializeGL()
 {
 	glEnable(GL_MULTISAMPLE);
-    glShadeModel(GL_SMOOTH);
+    // glShadeModel(GL_SMOOTH);
     glClearColor(0.0, 0.0, 0.0, 1.0);
 
     // temp put init here
@@ -74,13 +74,13 @@ void GLWindow::mouseMoveEvent(QMouseEvent *event)
 
 void GLWindow::paintEvent(QPaintEvent *event)
 {
-	makeCurrent();
-	glClear(GL_COLOR_BUFFER_BIT);
+	// makeCurrent();
+	// glClear(GL_COLOR_BUFFER_BIT);
 
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
     game.Draw(painter);
-	painter.end();
+    painter.end();
 }
 
 void GLWindow::MainLoop()

@@ -5,9 +5,8 @@
 Game::Game()
 {
 	// initialize in init method
-	// gameState = WAIT_FOR_STROKE;
-	gameState = FREE_BALL;
-	// gameState = BALL_IS_RUNNING;
+	// gameState = FREE_BALL;
+	gameState = START_FRAME;
 	elapsedTime = 0;
 }
 
@@ -35,11 +34,9 @@ void Game::Update()
 		case FREE_BALL:
 			// check before set position
             if(table.positionIsLegal(mousePosition,referee))
+            {
                 ballsManager.getCueBall().setPosition(mousePosition);
-			// chech if the position is legal
-			// if the position is illegal 
-			// just put the cue ball in the center of the kitchen(free ball area)
-			// use TABLE method
+            }
 			break;
 		case BALL_IS_RUNNING:
 			if (!ballsManager.isRunning())
@@ -49,8 +46,9 @@ void Game::Update()
 			}
 			break;
         case WAIT_FOR_STROKE:
-
             break;
+        case START_FRAME:
+        	break;
 	}
 }
 
@@ -70,9 +68,20 @@ void Game::Draw(QPainter& painter)
             break;
         case BALL_IS_RUNNING:
             break;
+        case START_FRAME:
+        	QColor miku_blue(00, 174, 255);
+        	painter.setPen(miku_blue);
+
+        	QFont font("Consolas", 100, 100, false);
+        	painter.setFont(font);
+
+        	painter.drawText(QRectF(100, 100, 1000, 250), "Billiards");
+        	break;
     }
 
     // debug info
+    QFont font;
+    painter.setFont(font);
     painter.drawText(QRectF(420, 535, 250, 25), "mouse press elapsed time");
     painter.drawText(QRectF(580, 535, 50, 25), QString::number(elapsedTime));
 }
@@ -80,6 +89,7 @@ void Game::Draw(QPainter& painter)
 void Game::setMousePosition(Vector2 position)
 {
 	mousePosition = position;
+	// change text size below
 }
 
 void Game::mousePress(int elapsed)
@@ -93,11 +103,15 @@ void Game::mousePress(int elapsed)
 			gameState = WAIT_FOR_STROKE;
 			break;
 		case WAIT_FOR_STROKE:
-			gameState = BALL_IS_RUNNING;
-			cue.Stroke(elapsed, ballsManager.getCueBall());
+            cue.Stroke(elapsed, ballsManager.getCueBall());
+            gameState = BALL_IS_RUNNING;
 			break;
         case BALL_IS_RUNNING:
             break;
+        case START_FRAME:
+        	// decide game mode
+        	gameState = FREE_BALL;
+        	break;
 	}
 }
 

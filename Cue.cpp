@@ -45,14 +45,19 @@ void Cue::Draw(QPainter& painter, Ball& cueBall)
 
 void Cue::Stroke(int elapsed, Ball& cueBall)
 {
-	// 
 	// use elapsed to calc the speed
 	Vector2 cuePosition = cueBall.getPosition();
 	Vector2 speed = mousePosition - cuePosition;
     float scale = (float)elapsed / 1000;
+    // set max speed
     if (scale > 1)
 	{
         scale = 1;
+	}
+	// set min speed ? is needed?
+	if (scale < 0.2)
+	{
+		scale = 0.2;
 	}
 	speed = speed.getNormalize() * scale;
 	cueBall.setSpeed(speed);

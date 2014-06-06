@@ -39,7 +39,7 @@ Vector2 Ball::getSpeed() const
 void Ball::setSpeed(Vector2 v)
 {
 	speed = v;
-	if (speed.getX() > 0 || speed.getY() > 0)
+    if (speed.getX() != 0 || speed.getY() != 0)
 	{
 		ballState = RUNNING;
 	}

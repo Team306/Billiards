@@ -13,7 +13,21 @@
 // such as initialize a new game
 // change game state, etc.
 
-enum GAME_STATE { WAIT_FOR_STROKE, FREE_BALL, BALL_IS_RUNNING };
+enum GAME_STATE 
+{ 
+	WAIT_FOR_STROKE, 
+	FREE_BALL, 
+	BALL_IS_RUNNING, 
+	START_FRAME, 
+	END_FRAME, 
+};
+
+enum GAME_MODE 
+{ 
+	PRACTICE_MODE,
+	VERSUS_MODE, 
+	NETWORK_MODE, 
+};
 
 class Game
 {
@@ -28,6 +42,9 @@ private:
 
 	// Game state
 	GAME_STATE gameState;
+
+	// Game mode
+	GAME_MODE gameMode;
 
 	// debug variables
 	int elapsedTime;

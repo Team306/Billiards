@@ -18,7 +18,9 @@ private:
 
 	Vector2 position;
 	Vector2 picPosition;
-    QRect R1,R2,R3,R4,R5,R6;
+    QRect R1,R2,R3,R4,R5,R6,R7,R8;
+    float pocketRadius;
+    Vector2 p1,p2,p3;
 
 public:
 	Table();
