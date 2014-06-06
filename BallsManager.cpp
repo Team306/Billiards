@@ -37,7 +37,7 @@ void BallsManager::Update(Table& table, Referee& referee)
     	// change speed or sth else
 
     	// test
-    	cueBall.setSpeed(Vector2());
+        //cueBall.setSpeed(Vector2());
     }
     for (unsigned i = 0; i < ballsList.size(); ++i)
     {
@@ -47,7 +47,7 @@ void BallsManager::Update(Table& table, Referee& referee)
 			// change speed or sth else
 			
 			// test
-	    	cueBall.setSpeed(Vector2());
+            //cueBall.setSpeed(Vector2());
 		}
 
 		// and then detect the balls with table
