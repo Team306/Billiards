@@ -22,12 +22,14 @@ public:
 
 	// init method
 	void init();
-	void chooseRule(std::string ruleName);
+    void chooseRule(std::string ruleName);
 
 	// get rule
 	std::vector<Ball> getBallsList() const;
 	Ball getCueBall() const;
 	float getBallRadius() const;
+
+	
 };
 
 

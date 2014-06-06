@@ -17,23 +17,36 @@ void Table::init(Referee& referee)
     position.setXY(40, 40);
     picSize.setXY(1240, 720);
     size.setXY(1160, 640);
-    R1.setCoords(position.getX() + 40, position.getY(), position.getX() + size.getX() / 2 - 40,
-                 position.getY() + referee.getBallRadius());
+    pocketRadius = 40;
 
-    R2.setCoords(position.getX() + size.getX() / 2 + 40, position.getY(), position.getX() + size.getX() - 40,
-                 position.getY() + referee.getBallRadius());
+    p1.setXY(position.getX() + size.getX(), position.getY());
+    p2.setXY(position.getX(), position.getY() + size.getY());
+    p3.setXY(position.getX() + size.getX(), position.getY() + size.getY());
 
-    R3.setCoords(position.getX() + 40, position.getY() + size.getY() - referee.getBallRadius(),
-                 position.getX() + size.getX() / 2 - 40, position.getY() + size.getY());
+    //R1 to R6 is used to detect crash
+    R1.setCoords(position.getX() + 35, position.getY(), position.getX() + size.getX() / 2 - 35,
+                 position.getY() + referee.getBallRadius());//topleft
 
-    R4.setCoords(position.getX() + size.getX() / 2  +40, position.getY() + size.getY() - referee.getBallRadius(),
-                 position.getX() + size.getX() - 40,position.getY() + size.getY());
+    R2.setCoords(position.getX() + size.getX() / 2 + 35, position.getY(), position.getX() + size.getX() - 35,
+                 position.getY() + referee.getBallRadius());//topright
 
-    R5.setCoords(position.getX(), position.getY() + 40, position.getX() + referee.getBallRadius(),
-                 position.getY() + size.getY() - 40);
+    R3.setCoords(position.getX() + 35, position.getY() + size.getY() - referee.getBallRadius(),
+                 position.getX() + size.getX() / 2 - 35, position.getY() + size.getY());//bottomleft
 
-    R6.setCoords(position.getX() + size.getX() - referee.getBallRadius(), position.getY() + 40,
-                 position.getX() + size.getX(),position.getY() + size.getY() - 40);
+    R4.setCoords(position.getX() + size.getX() / 2  + 35, position.getY() + size.getY() - referee.getBallRadius(),
+                 position.getX() + size.getX() - 35,position.getY() + size.getY());//bottomright
+
+    R5.setCoords(position.getX(), position.getY() + 35, position.getX() + referee.getBallRadius(),
+                 position.getY() + size.getY() - 35);//left
+
+    R6.setCoords(position.getX() + size.getX() - referee.getBallRadius(), position.getY() + 35,
+                 position.getX() + size.getX(),position.getY() + size.getY() - 35);//right
+    //R7 to R8 middle pocket
+    R7.setCoords(position.getX() + size.getX() / 2 - 30,position.getY() - referee.getBallRadius(),
+                 position.getX() + size.getX() / 2 + 30,position.getY());
+
+    R8.setCoords(position.getX() + size.getX() / 2 - 30,position.getY() + size.getY(),
+                 position.getX() + size.getX() / 2 + 30,position.getY() + size.getY() + referee.getBallRadius());
 }
 
 Vector2 Table::getSize() const
@@ -77,7 +90,9 @@ void Table::Draw(QPainter& painter)
     painter.drawRect(R3);
     painter.drawRect(R4);
     painter.drawRect(R5);
-    painter.drawRect(R6);*/
+    painter.drawRect(R6);
+    painter.drawRect(R7);
+    painter.drawRect(R8);*/
 }
 
 // collision detection
@@ -86,37 +101,43 @@ bool Table::collidesWith(Ball& b)
 	// detect collision here
     if(R1.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
+        if(b.getSpeed().getY() < 0)
+            b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
     if(R2.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
+        if(b.getSpeed().getY() < 0)
+            b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
     if(R3.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
+        if(b.getSpeed().getY() > 0)
+            b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
     if(R4.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
+        if(b.getSpeed().getY() > 0)
+            b.setSpeed(Vector2(b.getSpeed().getX(),0 - b.getSpeed().getY()));
         return true;
     }
 
     if(R5.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
+        if(b.getSpeed().getX() < 0)
+            b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
         return true;
     }
 
     if(R6.contains(b.getPosition().getX(),b.getPosition().getY(),false))
     {
-        b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
+        if(b.getSpeed().getX() > 0)
+            b.setSpeed(Vector2(0 - b.getSpeed().getX(), b.getSpeed().getY()));
         return true;
     }
 
@@ -135,5 +156,14 @@ bool Table::positionIsLegal(Vector2 p,Referee &referee)
 bool Table::checkPockets(Ball& ball)
 {
     // if the ball is in the pocket return true;
+    if(R7.contains(ball.getPosition().getX(), ball.getPosition().getY(), false)||
+            R8.contains(ball.getPosition().getX(), ball.getPosition().getY(), false))
+        return true;
+
+    if((ball.getPosition().distanceBetween(position) <= 0.5 * pocketRadius )||
+            (ball.getPosition().distanceBetween(p1) <= 0.5 * pocketRadius )||
+            (ball.getPosition().distanceBetween(p2) <= 0.5 * pocketRadius )||
+            (ball.getPosition().distanceBetween(p3) <= 0.5 * pocketRadius ))
+        return true;
     return false;
 }
