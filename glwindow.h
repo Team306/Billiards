@@ -7,6 +7,7 @@
 #include <QGLWidget>
 #include <QTimer>
 #include <QTIme>
+#include <QPushButton>
 #include "Game.h"
 
 class GLWindow : public QGLWidget
