@@ -13,24 +13,29 @@ TARGET = Billiards
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-    Game.cpp \
+SOURCES += \
     Ball.cpp \
-    Vector2.cpp \
     BallsManager.cpp \
-    Table.cpp \
-    glwindow.cpp \
-    Referee.cpp \
     Cue.cpp \
-    Player.cpp
+    Game.cpp \
+    glwindow.cpp \
+    main.cpp \
+    Player.cpp \
+    Referee.cpp \
+    Table.cpp \
+    MyMath.cpp \
+    CollideEngine.cpp
 
 HEADERS  += \
     Ball.h \
     BallsManager.h \
     Cue.h \
     Game.h \
-    Vector2.h \
-    Table.h \
     glwindow.h \
+    Player.h \
     Referee.h \
-    Player.h
+    Table.h \
+    MyMath.h \
+    CollideEngine.h
+
+FORMS    +=
