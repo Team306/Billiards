@@ -6,77 +6,41 @@
 
 Referee::Referee()
 {
-    scoreToadd = 0;
-    judge_result = NOTJUDGE;
+
 }
 
 Referee::~Referee()
 {
 }
 
-
-void Referee::init(int gameRule)
+void Referee::init()
 {
 	// read config file
-    judge_result = NOTJUDGE;
-    game_rule = (GAME_RULE)gameRule;
-    std::ifstream fin;
-    switch(game_rule){
-        case EIGHT_BALL:
-            fin.open("test8_config.txt");
-            break;
-
-        case NINE_BALL:
-            fin.open("test9_config.txt");
-            break;
-
-        case SNOOKER:
-            fin.open("config2.txt");
-            break;
-
-        default:
-            fin.open("config.txt");
-            break;
-     }
-    std::string str;
-    while (fin >> str)
-    {
-        if (str == "ballRadius")
-        {
-            break;
-        }
-    }
-    fin >> ballRadius;
-    fin.close();
+	std::ifstream fin;
+	fin.open("config.txt");
+	std::string str;
+	while (fin >> str)
+	{
+		if (str == "ballRadius")
+		{
+			break;
+		}
+	}
+	fin >> ballRadius;
+	fin.close();
 }
 
-//void Referee::chooseRule(std::string ruleName)
-//{
+void Referee::chooseRule(std::string ruleName)
+{
 	// change state machine
-//}
+}
 
 std::vector<Ball> Referee::getBallsList() const
 {
 	// use rule here
 	// read the file get config info
 	std::ifstream fin;
-    switch(game_rule){
-        case EIGHT_BALL:
-            fin.open("test8_config.txt");
-            break;
-
-        case NINE_BALL:
-            fin.open("test9_config.txt");
-            break;
-
-        case SNOOKER:
-            fin.open("config2.txt");
-            break;
-
-        default:
-            fin.open("config.txt");
-            break;
-     }
+	fin.open("config.txt");
 	std::string str;
 	while (fin >> str)
 	{
@@ -112,23 +76,7 @@ Ball Referee::getCueBall() const
 {
 	// read config file
 	std::ifstream fin;
-    switch(game_rule){
-        case EIGHT_BALL:
-            fin.open("test8_config.txt");
-            break;
-
-        case NINE_BALL:
-            fin.open("test9_config.txt");
-            break;
-
-        case SNOOKER:
-            fin.open("config2.txt");
-            break;
-
-        default:
-            fin.open("config.txt");
-            break;
-     }
+	fin.open("config.txt");
 	std::string str;
 	while (fin >> str)
 	{
@@ -155,6 +103,7 @@ float Referee::getBallRadius() const
 {
 	return ballRadius;
 }
+
 
 JUDGE_RESULT Referee::judge(Player *_currentplayer, std::vector<Ball> _ballslist){
     std::vector<std::string> onPocketlist = _currentplayer->getOnpocketlist();
@@ -287,3 +236,4 @@ bool Referee::judgeSelfball(Player *_currentplayer, std::string ballname){
 void Referee::clearjudgeResult(){
     judge_result = NOTJUDGE;
 }
+

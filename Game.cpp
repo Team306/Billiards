@@ -8,7 +8,6 @@ Game::Game()
 	// initialize in init method
 	// gameState = FREE_BALL;
 	gameState = START_FRAME;
-    gameRule = EIGHT_BALL;
 	elapsedTime = 0;
     player1.init();
     player2.init();
@@ -24,8 +23,7 @@ Game::~Game()
 void Game::init()
 {
 	// init here
-
-    referee.init(gameRule);
+    referee.init();
     table.init(referee);
 	ballsManager.init(referee);
 	cue.init(referee);
@@ -70,6 +68,7 @@ void Game::Update()
 			{
                 std::cout<<current_player->getCueball_in()<<std::endl;
                 if(referee.judge(current_player,ballsManager.getBallsList()) == TO_FREE_BALL){
+
                     gameState = FREE_BALL;
                     if(current_player->getPlayerflag() == LOCAL){
                         current_player->Exchange();
@@ -106,7 +105,6 @@ void Game::Update()
                     gameState = END_FRAME;
                     break;
                 }
-
 				// call the referee
 			}
 			break;
@@ -133,17 +131,7 @@ void Game::Draw(QPainter& painter)
             break;
         case BALL_IS_RUNNING:
             break;
-        case END_FRAME:
-            //painter.setFont(font);
-            if(player1.getGameresult() == SUCCESS){
-                painter.drawText(QRectF(108, 88, 1000, 250), "PLAY1 WIN!!!");
-            }
-            else{
-                painter.drawText(QRectF(108, 88, 1000, 250), "PLAY2 WIN!!!");
-            }
-            break;
         case START_FRAME:
-            // print the title
             QColor gray(100, 100, 100, 200);
             painter.setPen(gray);
 
@@ -157,7 +145,6 @@ void Game::Draw(QPainter& painter)
 
         	painter.drawText(QRectF(100, 80, 1000, 250), "Billiards");
 
-            // print the 3 mode choose
             if (QRect(420, 300, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
             {
                 font.setPointSize(50);
@@ -203,31 +190,9 @@ void Game::Draw(QPainter& painter)
                 painter.drawText(QRectF(420, 500, 350, 50), "Network Mode");
             }
 
-            // print 3 rule
-            font.setPointSize(20);
-            font.setWeight(20);
-            painter.setFont(font);
-            painter.drawText(QRectF(900, 500, 300, 30), "Eight Ball");
-            painter.drawText(QRectF(900, 550, 300, 30), "Nine Ball");
-            painter.drawText(QRectF(900, 600, 300, 30), "Snooker");
-
-            switch (gameRule)
-            {
-                case EIGHT_BALL:
-                    painter.drawText(QRectF(860, 500, 300, 30), "√");
-                    break;
-                case NINE_BALL:
-                    painter.drawText(QRectF(860, 550, 300, 30), "√");
-                    break;
-                case SNOOKER:
-                    painter.drawText(QRectF(860, 600, 300, 30), "√");
-                    break;
-            }
-
-            // print the copyright text
             font.setPointSize(12);
             painter.setFont(font);
-            painter.drawText(QRectF(80, 630, 250, 25), "Copyright (C) 2014 Team306");
+            painter.drawText(QRectF(800, 600, 250, 25), "Copyright (C) 2014 Team306");
         	break;
     }
 
@@ -244,8 +209,6 @@ void Game::Draw(QPainter& painter)
      painter.drawText(QRectF(600, 600, 50, 25),QString::fromStdString(str[0]));
      //std::cout<<str[0]<<std::endl;
     }
-    //std::cout<<getPlayerflag()<<std::endl;
-
 }
 
 void Game::setMousePosition(Vector2 position)
@@ -269,45 +232,24 @@ void Game::mousePress(int elapsed)
             gameState = BALL_IS_RUNNING;
 			break;
         case BALL_IS_RUNNING:
-            break;    
+            break;
         case START_FRAME:
         	// decide game mode
             if (QRect(420, 300, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
             {
                 gameState = FREE_BALL;
                 gameMode = PRACTICE_MODE;
-                ballsManager.getCueBall().setPosition(Vector2(240, 360));
             }
             if (QRect(420, 400, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
             {
                 gameState = FREE_BALL;
                 gameMode = VERSUS_MODE;
-                ballsManager.getCueBall().setPosition(Vector2(240, 360));
             }
             if (QRect(420, 500, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
             {
                 gameState = FREE_BALL;
                 gameMode = NETWORK_MODE;
-                ballsManager.getCueBall().setPosition(Vector2(240, 360));
             }
-
-            // choose rule
-            if (QRect(900, 500, 300, 30).contains(mousePosition.getX(), mousePosition.getY(), false))
-            {
-                gameRule = EIGHT_BALL;
-                init();
-            }
-            if (QRect(900, 550, 300, 30).contains(mousePosition.getX(), mousePosition.getY(), false))
-            {
-                gameRule = NINE_BALL;
-                init();
-            }
-            if (QRect(900, 600, 300, 30).contains(mousePosition.getX(), mousePosition.getY(), false))
-            {
-                gameRule = SNOOKER;
-                init();
-            }
-
         	break;
 	}
 }

@@ -22,7 +22,7 @@ GLWindow::GLWindow(QWidget *parent)
 	connect(&timer, SIGNAL(timeout()), this, SLOT(MainLoop()));
 	timer.start(msPerFrame);
 
-    setFixedSize(1280, 680);
+    setFixedSize(1240, 720);
     setWindowTitle(tr("Billiards by Team306"));
 
     // put the window in center
