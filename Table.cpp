@@ -15,8 +15,8 @@ void Table::init(Referee& referee)
 	// init method
     picPosition.setXY(0, 0);
     position.setXY(40, 40);
-    picSize.setXY(1240, 720);
-    size.setXY(1160, 640);
+    picSize.setXY(1280, 680);
+    size.setXY(1200, 600);
     pocketRadius = 40;
 
     p1.setXY(position.getX() + size.getX(), position.getY());
@@ -82,7 +82,8 @@ void Table::Draw(QPainter& painter)
     painter.drawRoundRect(QRectF(position.getX(), position.getY(), size.getX(), size.getY()),7,14);
 
     painter.setPen(QPen(QColor(255,255,255)));
-    painter.drawLine(position.getX()+300,position.getY(),position.getX()+300,position.getY()+size.getY());
+    float lineX = (float)65 / (float)254 * size.getX();
+    painter.drawLine(position.getX() + lineX, position.getY(), position.getX() + lineX, position.getY() + size.getY());
     //test
     painter.setBrush(QBrush(QColor(100,100,100)));
     /*painter.drawRect(R1);
