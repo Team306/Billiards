@@ -22,11 +22,11 @@ void Referee::init(int gameRule)
     std::ifstream fin;
     switch(game_rule){
         case EIGHT_BALL:
-            fin.open("config.txt");
+            fin.open("test8_config.txt");
             break;
 
         case NINE_BALL:
-            fin.open("config1.txt");
+            fin.open("test9_config.txt");
             break;
 
         case SNOOKER:
@@ -61,11 +61,11 @@ std::vector<Ball> Referee::getBallsList() const
 	std::ifstream fin;
     switch(game_rule){
         case EIGHT_BALL:
-            fin.open("config.txt");
+            fin.open("test8_config.txt");
             break;
 
         case NINE_BALL:
-            fin.open("config1.txt");
+            fin.open("test9_config.txt");
             break;
 
         case SNOOKER:
@@ -113,11 +113,11 @@ Ball Referee::getCueBall() const
 	std::ifstream fin;
     switch(game_rule){
         case EIGHT_BALL:
-            fin.open("config.txt");
+            fin.open("test8_config.txt");
             break;
 
         case NINE_BALL:
-            fin.open("config1.txt");
+            fin.open("test9_config.txt");
             break;
 
         case SNOOKER:

@@ -52,8 +52,8 @@ void BallsManager::Update(Table& table, Player *currentplayer)
             // change speed or sth else
 			
 			// test
-
-            //cueBall.setSpeed(Vector2());
+            ballsList[i].setSpeed(cueBall.getSpeed());
+            cueBall.setSpeed(Vector2());
 
             // cueBall.setSpeed(Vector2());
 		}
