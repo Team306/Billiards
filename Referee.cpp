@@ -3,6 +3,12 @@
 #include <fstream>
 #include "Referee.h"
 
+#ifndef EIGHT_BALL_CONFIG_FILENAME
+#define EIGHT_BALL_CONFIG_FILENAME "test8_config.txt"
+#define NINE_BALL_CONFIG_FILENAME "config1.txt"
+#define SNOOKER_CONFIG_FILENAME "config2.txt"
+#endif
+
 Referee::Referee()
 {
     scoreToadd = 0;
@@ -22,15 +28,15 @@ void Referee::init(int gameRule)
     std::ifstream fin;
     switch(game_rule){
         case EIGHT_BALL:
-            fin.open("test8_config.txt");
+            fin.open(EIGHT_BALL_CONFIG_FILENAME);
             break;
 
         case NINE_BALL:
-            fin.open("test9_config.txt");
+            fin.open(NINE_BALL_CONFIG_FILENAME);
             break;
 
         case SNOOKER:
-            fin.open("config2.txt");
+            fin.open(SNOOKER_CONFIG_FILENAME);
             break;
 
         default:
@@ -61,15 +67,15 @@ std::vector<Ball> Referee::getBallsList() const
 	std::ifstream fin;
     switch(game_rule){
         case EIGHT_BALL:
-            fin.open("test8_config.txt");
+            fin.open(EIGHT_BALL_CONFIG_FILENAME);
             break;
 
         case NINE_BALL:
-            fin.open("test9_config.txt");
+            fin.open(NINE_BALL_CONFIG_FILENAME);
             break;
 
         case SNOOKER:
-            fin.open("config2.txt");
+            fin.open(SNOOKER_CONFIG_FILENAME);
             break;
 
         default:
@@ -113,15 +119,15 @@ Ball Referee::getCueBall() const
 	std::ifstream fin;
     switch(game_rule){
         case EIGHT_BALL:
-            fin.open("test8_config.txt");
+            fin.open(EIGHT_BALL_CONFIG_FILENAME);
             break;
 
         case NINE_BALL:
-            fin.open("test9_config.txt");
+            fin.open(NINE_BALL_CONFIG_FILENAME);
             break;
 
         case SNOOKER:
-            fin.open("config2.txt");
+            fin.open(SNOOKER_CONFIG_FILENAME);
             break;
 
         default:

@@ -227,7 +227,7 @@ void Game::Draw(QPainter& painter)
             // print the copyright text
             font.setPointSize(12);
             painter.setFont(font);
-            painter.drawText(QRectF(80, 630, 250, 25), "Copyright (C) 2014 Team306");
+            painter.drawText(QRectF(100, 600, 250, 25), "Copyright (C) 2014 Team306");
         	break;
     }
 
