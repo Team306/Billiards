@@ -2,24 +2,22 @@
 ----------------
 using Qt5 platform
 
+release 0.1 Version 2014-06-07 0:30
+
+## *DEADLINE*
+2014-06-16 Monday
 
 ## 完成目标
 	2D显示框架
 	底层模型建立
 	碰撞引擎
 	桌球规则
-	人工智能
 	网络模块
+	人工智能
 	使用Qt OpenGL进行2D转3D的尝试
-
-首先先完成一个粗略成品再进行修改吧！
 
 ## 项目地址
 github.com/Team306/Billiards
-如果不习惯用命令行git的话请直接使用GitHub for Windows
-
-## *DEADLINE*
-2014-06-23 Monday
 
 ## *GLOSARRY*
 这是网上找的资料，直接贴在这里了

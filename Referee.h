@@ -21,7 +21,7 @@ public:
 	~Referee();
 
 	// init method
-	void init();
+    void init(int gameRule);
 	void chooseRule(std::string ruleName);
 
 	// get rule

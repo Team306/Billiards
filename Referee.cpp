@@ -12,7 +12,7 @@ Referee::~Referee()
 {
 }
 
-void Referee::init()
+void Referee::init(int gameRule)
 {
 	// read config file
 	std::ifstream fin;

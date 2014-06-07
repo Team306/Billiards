@@ -29,6 +29,13 @@ enum GAME_MODE
 	NETWORK_MODE, 
 };
 
+enum GAME_RULE
+{
+    EIGHT_BALL,
+    NINE_BALL,
+    SNOOKER,
+};
+
 class Game
 {
 private:
@@ -41,11 +48,9 @@ private:
     Player player2;
     Player *current_player;
 
-
-	// Game state
 	GAME_STATE gameState;
-	// Game mode
 	GAME_MODE gameMode;
+    GAME_RULE gameRule;
 
 	// debug variables
 	int elapsedTime;
