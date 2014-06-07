@@ -68,6 +68,7 @@ void Game::Update()
 		case BALL_IS_RUNNING:
 			if (!ballsManager.isRunning())
 			{
+                std::cout<<current_player->getCueball_in()<<std::endl;
                 if(referee.judge(current_player,ballsManager.getBallsList()) == TO_FREE_BALL){
                     gameState = FREE_BALL;
                     if(current_player->getPlayerflag() == LOCAL){
@@ -84,21 +85,20 @@ void Game::Update()
 
                 if(referee.judge(current_player,ballsManager.getBallsList()) == TO_EXCHANGE){
                     gameState = WAIT_FOR_STROKE;
+                    current_player->Exchange();
                     if(current_player->getPlayerflag() == LOCAL){
-                        current_player->Exchange();
                         current_player = &player2;
                         break;
                     }
                     else{
-                        current_player->Exchange();
                         current_player = &player1;
                         break;
                     }
                 }
 
                 if(referee.judge(current_player,ballsManager.getBallsList()) == TO_GOON){
-                    current_player->Goon();
                     gameState = WAIT_FOR_STROKE;
+                    current_player->Goon();
                     break;
                 }
 
@@ -239,6 +239,11 @@ void Game::Draw(QPainter& painter)
     painter.drawText(QRectF(400, 640, 100, 100),QString::number(current_player->getPlayerflag()));
     painter.drawText(QRectF(400, 600, 50, 25),QString::number(current_player->getBalltype()));
     painter.drawText(QRectF(500, 600, 50, 25),QString::number(current_player->getHitflag()));
+    std::vector<std::string> str= current_player->getOnpocketlist();
+    if(str.size()){
+     painter.drawText(QRectF(600, 600, 50, 25),QString::fromStdString(str[0]));
+     //std::cout<<str[0]<<std::endl;
+    }
     //std::cout<<getPlayerflag()<<std::endl;
 
 }
@@ -257,6 +262,7 @@ void Game::mousePress(int elapsed)
 	{
 		case FREE_BALL:
 			gameState = WAIT_FOR_STROKE;
+            current_player->Exchange();
 			break;
 		case WAIT_FOR_STROKE:
             cue.Stroke(elapsed, ballsManager.getCueBall());

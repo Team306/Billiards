@@ -116,7 +116,7 @@ void Ball::Draw(QPainter& painter)
 bool Ball::collidesWith(Ball& b)
 {
 	float distance = this->position.distanceBetween(b.position);
-	if (distance - this->radius - b.radius <= 0)
+    if (distance - this->radius - b.radius <= 0 && (this->getSpeed().Length()!=0 || b.getSpeed().Length() !=0))
 	{
 		return true;
 	}
