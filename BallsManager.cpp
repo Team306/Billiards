@@ -26,6 +26,16 @@ void BallsManager::Update(Table& table, Player *currentplayer)
 {
 	// Update each ball
     cueBall.Move();
+=======
+    /*Vector2 acc = cueBall.getSpeed().getNormalize()*0.3;
+    Vector2 temp = cueBall.getSpeed()-acc;
+    if(temp.getX()*cueBall.getSpeed().getX()<=0){
+        cueBall.setSpeed(Vector2());
+    }
+    else{
+        cueBall.setSpeed(temp);
+    }*/
+    cueBall.Update();
 	for (std::vector<Ball>::iterator iter = ballsList.begin(); iter != ballsList.end(); ++iter)
 	{
         iter->Move();
@@ -45,11 +55,23 @@ void BallsManager::Update(Table& table, Player *currentplayer)
     	// first detect cue ball
         if (this->collideengine.DectBallToBallCollision(cueBall,ballsList[i]))
 		{
-            if(currentplayer->getHitflag() == 0 ){
+            if(currentplayer->getHitflag()==0){
                 currentplayer->setHitflag(1);
                 currentplayer->setFirsthit(ballsList[i].getName());
             }
+<<<<<<< HEAD
             collideengine.ProcessBallToBallCollision(cueBall,ballsList[i]);
+=======
+
+            // change speed or sth else
+			
+			// test
+
+            ballsList[i].setSpeed(cueBall.getSpeed());
+            cueBall.setSpeed(Vector2());
+
+            // cueBall.setSpeed(Vector2());
+>>>>>>> cba5d16caf80af621b257e6ae96b1e5ce09ea13a
 		}
 
 		// and then detect the balls with table
@@ -64,7 +86,14 @@ void BallsManager::Update(Table& table, Player *currentplayer)
     	{
             if (this->collideengine.DectBallToBallCollision(ballsList[i],ballsList[j]))
     		{
+<<<<<<< HEAD
                 this->collideengine.ProcessBallToBallCollision(ballsList[i],ballsList[j]);
+=======
+    			// change speed or sth else
+                ballsList[i].setSpeed(ballsList[i].getSpeed()*(-0.7));
+                ballsList[j].setSpeed(ballsList[i].getSpeed()*0.6);
+
+>>>>>>> cba5d16caf80af621b257e6ae96b1e5ce09ea13a
     		}
     	}
     }
@@ -91,7 +120,7 @@ void BallsManager::Update(Table& table, Player *currentplayer)
                 }
                 else{
                     if(ballsList[i].getName() == "eight"){
-
+                        currentplayer->setGameresult(FAIL);
                     }
                     else{
                        currentplayer->setBalltype(BIG);
@@ -141,4 +170,8 @@ bool BallsManager::isRunning() const
 		return false;
 	}
 	return true;
+}
+
+std::vector<Ball> BallsManager::getBallsList() const{
+    return ballsList;
 }
