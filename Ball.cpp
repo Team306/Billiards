@@ -4,23 +4,16 @@
 
 Ball::Ball()
 {
+	rightRotation = 0;
+	upRotation = 0;
+
 	ballState = STILL;
 }
-Ball::Ball(const Vector3& position, float radius)
-    : position(position), radius(radius)
-{
-    this->speed=Vector3(0,0,0);
-    this->anglespeed=Vector3(0,0,0);
-    this->Im=0.4f*M*(this->radius)*(this->radius);
-    Ball();
-}
 
-Ball::Ball(const Vector2& position, float radius)
+Ball::Ball(Vector2 position, float radius)
     : position(position), radius(radius)
 {
-    this->speed=Vector3(0,0,0);
-    this->anglespeed=Vector3(0,0,0);
-    this->Im=0.4f*M*(this->radius)*(this->radius);
+	// init rotation value
     Ball();
 }
 
@@ -28,54 +21,37 @@ Ball::~Ball()
 {
 }
 
-Vector3 Ball::getPosition() const
+Vector2 Ball::getPosition() const
 {
-    return this->position;
+	return position;
 }
 
-void Ball::setPosition(const Vector2& v)
+void Ball::setPosition(Vector2 v)
 {
-    position = Vector3(v);
+	position = v;
 }
 
-void Ball::setPosition(const Vector3& v)
+Vector2 Ball::getSpeed() const
 {
-    position = v;
+	return speed;
 }
 
-Vector3 Ball::getSpeed() const
+void Ball::setSpeed(Vector2 v)
 {
-    return this->speed;
+	speed = v;
+    if (speed.getX() != 0 || speed.getY() != 0)
+	{
+		ballState = RUNNING;
+	}
+	else
+	{
+		ballState = STILL;
+	}
 }
-
-void Ball::setSpeed(const Vector3& v)
-{
-    if(v.Length()>=0)
-        this->ballState=RUNNING;
-    this->speed = v;
-}
-
-Vector3 Ball::getAngleSpeed() const
-{
-    return this->anglespeed;
-}
-
-void Ball::setAngleSpeed(const Vector3& v)
-{
-    if(v.Length()>=0)
-        this->ballState=RUNNING;
-    this->anglespeed = v;
-}
-
 
 float Ball::getRadius() const
 {
-    return this->radius;
-}
-
-float Ball::getIm() const
-{
-    return this->Im;
+	return radius;
 }
 
 int Ball::getBallState() const
@@ -103,67 +79,13 @@ void Ball::setColor(QColor c)
 	color = c;
 }
 
-void Ball::ApplyImpulse(const Vector3& impulse,const Vector3& collideposition)
+void Ball::Update()
 {
-    this->speed += (impulse/M);//线速度
-    //??
-    if(impulse[2]!=0.0 && fabs(impulse[2])>1)
-    {
-        this->speed.setX(this->speed[0]/impulse[2]);
-        this->speed.setY(this->speed[1]/impulse[2]);
-    }
-    this->speed.setZ(0.0f); //z方向速度为0
-    this->anglespeed+= CrossProduct(collideposition-this->position,impulse)/this->Im; //角速度 ω=ω+R×It/Im
-    if(this->speed.Length()>0 || this->anglespeed.Length()>0)
-        this->ballState=RUNNING;
-}
+	position += speed;
+	// speed should slow down because of friction
+	// speed -= friction;
 
-void Ball::Move()
-{
-    if(this->ballState==STILL)
-        return;
-    Vector3 rollspeed; //角动量造成的速度
-    Vector3 wholespeed; //总速度
-    rollspeed=CrossProduct(this->anglespeed,Vector3(0,0,this->radius)); //(ωy*r,-ωx*r,0)
-    wholespeed=rollspeed+this->speed;
-
-    if(rollspeed.Length()<Froll_Threshold && this->speed.Length()<Froll_Threshold) //是否只有旋切运动
-    {
-        if(this->anglespeed[2]<Frotate_Threshold) //是否完全静止
-        {
-            this->ballState=STILL;
-            this->speed=Vector3(0,0,0);
-            this->anglespeed=Vector3(0,0,0);
-        }
-        else //施加旋切摩擦
-        {
-            if (this->anglespeed[2]>0)
-                this->anglespeed.setZ(this->anglespeed[2]-Frotate_GroundToBall) ;
-            else
-                this->anglespeed.setZ(this->anglespeed[2]+Frotate_GroundToBall);
-        }
-    }
-    else
-    {
-        if(wholespeed.Length()<Fslip_Threshold) //是否是滚动摩擦
-        {
-            this->ApplyImpulse(GetNormalize(this->speed)*(-M * Froll_GroundToBall), this->position);
-            //滚动摩擦时线速度完全由角速度提供,v=ω*r
-            this->anglespeed.setX( this->speed[1] / this->radius );
-            this->anglespeed.setY(- this->speed[0] / this->radius );
-        }
-        else //滑动摩擦
-        {
-            this->ApplyImpulse(GetNormalize(wholespeed)*(-M * Fslip_GroundToBall ), (this->position+Vector3(0, 0, this->radius)));//去除对ωz影响
-        }
-        //旋切摩擦
-        if (this->anglespeed[2]>0)
-            this->anglespeed.setZ(this->anglespeed[2]-Frotate_GroundToBall);
-        else
-            this->anglespeed.setZ(this->anglespeed[2]+Frotate_GroundToBall);
-    }
-    //更新位置
-    this->position += (this->speed * 1.0f);
+	// DO NOT DETECK COLLISION HERE!
 }
 
 void Ball::Draw(QPainter& painter)
@@ -190,3 +112,13 @@ void Ball::Draw(QPainter& painter)
     // painter.drawEllipse(QPoint(position.getX(), position.getY()), radius, radius);
 }
 
+// only return if 2 balls collide
+bool Ball::collidesWith(Ball& b)
+{
+	float distance = this->position.distanceBetween(b.position);
+	if (distance - this->radius - b.radius <= 0)
+	{
+		return true;
+	}
+	return false;
+}
