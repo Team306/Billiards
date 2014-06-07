@@ -234,10 +234,11 @@ void Game::Draw(QPainter& painter)
     // debug info
     QFont font;
     painter.setFont(font);
-    painter.drawText(QRectF(420, 700, 250, 25), "mouse press elapsed time");
-    painter.drawText(QRectF(580, 700, 50, 25), QString::number(elapsedTime));
-    painter.drawText(QRectF(400, 700, 50, 25),QString::number(current_player->getPlayerflag()));
-    painter.drawText(QRectF(400, 650, 50, 25),QString::number(current_player->getBalltype()));
+    painter.drawText(QRectF(420, 640, 250, 25), "mouse press elapsed time");
+    painter.drawText(QRectF(580, 640, 50, 25), QString::number(elapsedTime));
+    painter.drawText(QRectF(400, 640, 100, 100),QString::number(current_player->getPlayerflag()));
+    painter.drawText(QRectF(400, 600, 50, 25),QString::number(current_player->getBalltype()));
+    painter.drawText(QRectF(500, 600, 50, 25),QString::number(current_player->getHitflag()));
     //std::cout<<getPlayerflag()<<std::endl;
 
 }
@@ -262,7 +263,7 @@ void Game::mousePress(int elapsed)
             gameState = BALL_IS_RUNNING;
 			break;
         case BALL_IS_RUNNING:
-            break;
+            break;    
         case START_FRAME:
         	// decide game mode
             if (QRect(420, 300, 350, 50).contains(mousePosition.getX(), mousePosition.getY(), false))
