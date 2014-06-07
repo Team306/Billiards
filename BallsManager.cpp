@@ -45,10 +45,7 @@ void BallsManager::Update(Table& table, Player *currentplayer)
     	// first detect cue ball
 		if (cueBall.collidesWith(ballsList[i]))
 		{
-            if(currentplayer->getHitflag() == 0 ){
-                currentplayer->setHitflag(1);
-                currentplayer->setFirsthit(ballsList[i].getName());
-            }
+            currentplayer->setOnpocketlist(ballsList[i].getName());
             // change speed or sth else
 			
 			// test

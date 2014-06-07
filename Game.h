@@ -40,6 +40,7 @@ private:
     Player player1;
     Player player2;
     Player *current_player;
+    GAME_RULE game_Rule;
 
 
 	// Game state

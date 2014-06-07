@@ -23,7 +23,7 @@ Game::~Game()
 void Game::init()
 {
 	// init here
-    referee.init();
+    referee.init(game_Rule);
     table.init(referee);
 	ballsManager.init(referee);
 	cue.init(referee);
@@ -69,12 +69,12 @@ void Game::Update()
                 if(current_player->getCueball_in()){
                     gameState = FREE_BALL;
                     if(current_player->getPlayerflag() == LOCAL){
-                        current_player->update();
+                        current_player->Exchange();
                         current_player = &player2;
                         break;
                     }
                     else{
-                        current_player->update();
+                        current_player->Exchange();
                         current_player = &player1;
                         break;
                     }

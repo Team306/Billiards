@@ -5,41 +5,74 @@
 
 Referee::Referee()
 {
-
+    scoreToadd = 0;
 }
 
 Referee::~Referee()
 {
 }
 
-void Referee::init()
+void Referee::init(int _game_rule)
 {
 	// read config file
-	std::ifstream fin;
-	fin.open("config.txt");
-	std::string str;
-	while (fin >> str)
-	{
-		if (str == "ballRadius")
-		{
-			break;
-		}
-	}
-	fin >> ballRadius;
-	fin.close();
+    game_rule = (GAME_RULE)_game_rule;
+    std::ifstream fin;
+    switch(game_rule){
+        case EIGHT_BALL:
+            fin.open("config.txt");
+            break;
+
+        case NINE_BALL:
+            fin.open("config1.txt");
+            break;
+
+        case SNOKER:
+            fin.open("config2.txt");
+            break;
+
+        default:
+            fin.open("config.txt");
+            break;
+     }
+    std::string str;
+    while (fin >> str)
+    {
+        if (str == "ballRadius")
+        {
+            break;
+        }
+    }
+    fin >> ballRadius;
+    fin.close();
 }
 
-void Referee::chooseRule(std::string ruleName)
-{
+//void Referee::chooseRule(std::string ruleName)
+//{
 	// change state machine
-}
+//}
 
 std::vector<Ball> Referee::getBallsList() const
 {
 	// use rule here
 	// read the file get config info
 	std::ifstream fin;
-	fin.open("config.txt");
+    switch(game_rule){
+        case EIGHT_BALL:
+            fin.open("config.txt");
+            break;
+
+        case NINE_BALL:
+            fin.open("config1.txt");
+            break;
+
+        case SNOKER:
+            fin.open("config2.txt");
+            break;
+
+        default:
+            fin.open("config.txt");
+            break;
+     }
 	std::string str;
 	while (fin >> str)
 	{
@@ -75,7 +108,23 @@ Ball Referee::getCueBall() const
 {
 	// read config file
 	std::ifstream fin;
-	fin.open("config.txt");
+    switch(game_rule){
+        case EIGHT_BALL:
+            fin.open("config.txt");
+            break;
+
+        case NINE_BALL:
+            fin.open("config1.txt");
+            break;
+
+        case SNOKER:
+            fin.open("config2.txt");
+            break;
+
+        default:
+            fin.open("config.txt");
+            break;
+     }
 	std::string str;
 	while (fin >> str)
 	{
@@ -101,4 +150,31 @@ Ball Referee::getCueBall() const
 float Referee::getBallRadius() const
 {
 	return ballRadius;
+}
+
+JUDGE_RESULT Referee::judge(Player *_currentplayer, std::vector<Ball> _ballslist){
+    switch(game_rule){
+        case EIGHT_BALL:
+            if(_currentplayer->getCueball_in()){       //cueball in
+                judge_rusult = TO_FREE_BALL;
+                break;
+            }
+            if(_currentplayer->getBalltype() == SMALL && _currentplayer->getFirsthit() != "one" && _currentplayer->getFirsthit() != "two"
+                    && _currentplayer->getFirsthit() != "three" && _currentplayer->getFirsthit() != "four" && _currentplayer->getFirsthit() != "five"
+                    &&_currentplayer->getFirsthit() != "six" &&_currentplayer->getFirsthit() != "seven"){
+                judge_rusult = TO_EXCHANGE;
+                break;
+            }
+            if(_currentplayer->getBalltype() == SMALL && _currentplayer->getFirsthit() != "one" && _currentplayer->getFirsthit() != "two"
+                    && _currentplayer->getFirsthit() != "three" && _currentplayer->getFirsthit() != "four" && _currentplayer->getFirsthit() != "five"
+                    &&_currentplayer->getFirsthit() != "six" &&_currentplayer->getFirsthit() != "seven"){
+                judge_rusult = TO_EXCHANGE;
+                break;
+            }
+
+    }
+}
+
+int Referee::getScoreToadd() const{
+    return scoreToadd;
 }
