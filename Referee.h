@@ -11,7 +11,7 @@
 
 // define rule in it
 // maybe can use embedded scripts to implement
-enum GAME_RULE {EIGHT_BALL, NINE_BALL, SNOKER};
+enum GAME_RULE {EIGHT_BALL, NINE_BALL, SNOOKER};
 enum JUDGE_RESULT {TO_FREE_BALL, TO_EXCHANGE, TO_GOON, TO_END};
 
 class Referee
@@ -28,8 +28,8 @@ public:
 	~Referee();
 
 	// init method
-    void init(int);
-    //void chooseRule(std::string ruleName);
+
+    void init(int gameRule);
 
 	// get rule
 	std::vector<Ball> getBallsList() const;

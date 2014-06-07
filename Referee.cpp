@@ -12,12 +12,13 @@ Referee::~Referee()
 {
 }
 
-void Referee::init(int _game_rule)
+
+void Referee::init(int gameRule)
 {
 	// read config file
-    game_rule = (GAME_RULE)_game_rule;
+    gameRule = (GAME_RULE)gameRule;
     std::ifstream fin;
-    switch(game_rule){
+    switch(gameRule){
         case EIGHT_BALL:
             fin.open("config.txt");
             break;
@@ -26,7 +27,7 @@ void Referee::init(int _game_rule)
             fin.open("config1.txt");
             break;
 
-        case SNOKER:
+        case SNOOKER:
             fin.open("config2.txt");
             break;
 
@@ -65,7 +66,7 @@ std::vector<Ball> Referee::getBallsList() const
             fin.open("config1.txt");
             break;
 
-        case SNOKER:
+        case SNOOKER:
             fin.open("config2.txt");
             break;
 
@@ -117,7 +118,7 @@ Ball Referee::getCueBall() const
             fin.open("config1.txt");
             break;
 
-        case SNOKER:
+        case SNOOKER:
             fin.open("config2.txt");
             break;
 

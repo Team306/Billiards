@@ -40,13 +40,10 @@ private:
     Player player1;
     Player player2;
     Player *current_player;
-    GAME_RULE game_Rule;
 
-
-	// Game state
 	GAME_STATE gameState;
-	// Game mode
 	GAME_MODE gameMode;
+    GAME_RULE gameRule;
 
 	// debug variables
 	int elapsedTime;
