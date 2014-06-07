@@ -180,7 +180,7 @@ bool Table::collidesWith(Ball& b)
     }
 
     //bottomleft_pocket, 2 points
-    Vector2 detectP7(position.getX() + pocketRadius, position.getY());//bottom
+    Vector2 detectP7(position.getX() + pocketRadius, position.getY() + size.getY());//bottom
     Vector2 detectP8(position.getX(), position.getY() + size.getY() - pocketRadius);//left
     if(b.getPosition().distanceBetween(detectP7) <= b.getRadius())
     {

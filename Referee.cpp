@@ -208,13 +208,55 @@ JUDGE_RESULT Referee::judge(Player *_currentplayer, std::vector<Ball> _ballslist
             if(judgeSelfball(_currentplayer,_currentplayer->getFirsthit())==false){
                 return TO_EXCHANGE;
             }
+            if(_currentplayer->getCueball_in()){       //cueball in
+                return TO_FREE_BALL;
+            }
+            if(_currentplayer->getBalltype() == SMALL && _currentplayer->getFirsthit() != "one" && _currentplayer->getFirsthit() != "two"
+                    && _currentplayer->getFirsthit() != "three" && _currentplayer->getFirsthit() != "four" && _currentplayer->getFirsthit() != "five"
+                    &&_currentplayer->getFirsthit() != "six" &&_currentplayer->getFirsthit() != "seven"){
+                return TO_EXCHANGE;
+            }
 
             //hit no ball
             if(_currentplayer->getHitflag()==0){
                 return TO_EXCHANGE;
             }
-
             return TO_GOON;
+            break;
+
+       case NINE_BALL:
+            for(int i = 0; i < _currentplayer->getOnpocketlist().size(); i++)
+                if(_currentplayer->getOnpocketlist()[i] == "nine")
+                {
+                    for(int k = 0; k < _currentplayer->getOnpocketlist().size(); k++)
+                        if(_currentplayer->getOnpocketlist()[k] == "cueBall")
+                        {
+                            _currentplayer->setGameresult(FAIL);
+                            break;
+                        }
+                    /*if(_currentplayer->getGameresult() == NOTDEC)
+                        if(_currentplayer->getFirsthit() != Targetname)
+                        {
+                            _currentplayer->setGameresult(FAIL);
+                            break;
+                        }*/
+                    if(_currentplayer->getGameresult() == NOTDEC)
+                    {
+                        _currentplayer->setGameresult(SUCCESS);
+                        break;
+                    }
+                    return TO_END;
+                }
+
+            if(_currentplayer->getCueball_in())       //cueball in
+                return TO_FREE_BALL;
+            if(_currentplayer->getHitflag() == 0)
+                return TO_FREE_BALL;
+            /*if(_currentplayer->getFirsthit() != Targetname)
+                return TO_FREE_BALL;*/
+            if(_currentplayer->getOnpocketlist().size() != 0)
+                return TO_GOON;
+            return TO_EXCHANGE;
     }
 }
 
