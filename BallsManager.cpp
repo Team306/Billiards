@@ -25,6 +25,14 @@ void BallsManager::reset(Referee& referee)
 void BallsManager::Update(Table& table, Player *currentplayer)
 {
 	// Update each ball
+    /*Vector2 acc = cueBall.getSpeed().getNormalize()*0.3;
+    Vector2 temp = cueBall.getSpeed()-acc;
+    if(temp.getX()*cueBall.getSpeed().getX()<=0){
+        cueBall.setSpeed(Vector2());
+    }
+    else{
+        cueBall.setSpeed(temp);
+    }*/
     cueBall.Update();
 	for (std::vector<Ball>::iterator iter = ballsList.begin(); iter != ballsList.end(); ++iter)
 	{
@@ -49,11 +57,13 @@ void BallsManager::Update(Table& table, Player *currentplayer)
                 currentplayer->setHitflag(1);
                 currentplayer->setFirsthit(ballsList[i].getName());
             }
+
             // change speed or sth else
 			
 			// test
 
-            //cueBall.setSpeed(Vector2());
+            cueBall.setSpeed(cueBall.getSpeed()*(-0.8));
+            ballsList[i].setSpeed(cueBall.getSpeed()*(0.7));
 
             // cueBall.setSpeed(Vector2());
 		}
@@ -71,6 +81,8 @@ void BallsManager::Update(Table& table, Player *currentplayer)
     		if (ballsList[i].collidesWith(ballsList[j]))
     		{
     			// change speed or sth else
+                ballsList[i].setSpeed(ballsList[i].getSpeed()*(-0.7));
+                ballsList[j].setSpeed(ballsList[i].getSpeed()*0.6);
 
     		}
     	}

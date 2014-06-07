@@ -97,6 +97,7 @@ void Game::Update()
                 }
 
                 if(referee.judge(current_player,ballsManager.getBallsList()) == TO_GOON){
+                    current_player->Goon();
                     gameState = WAIT_FOR_STROKE;
                     break;
                 }
@@ -131,6 +132,15 @@ void Game::Draw(QPainter& painter)
         case FREE_BALL:
             break;
         case BALL_IS_RUNNING:
+            break;
+        case END_FRAME:
+            //painter.setFont(font);
+            if(player1.getGameresult() == SUCCESS){
+                painter.drawText(QRectF(108, 88, 1000, 250), "PLAY1 WIN!!!");
+            }
+            else{
+                painter.drawText(QRectF(108, 88, 1000, 250), "PLAY2 WIN!!!");
+            }
             break;
         case START_FRAME:
             // print the title
@@ -226,8 +236,10 @@ void Game::Draw(QPainter& painter)
     painter.setFont(font);
     painter.drawText(QRectF(420, 700, 250, 25), "mouse press elapsed time");
     painter.drawText(QRectF(580, 700, 50, 25), QString::number(elapsedTime));
-    painter.drawText(QRectF(400, 700, 100, 100),QString::number(current_player->getPlayerflag()));
+    painter.drawText(QRectF(400, 700, 50, 25),QString::number(current_player->getPlayerflag()));
+    painter.drawText(QRectF(400, 650, 50, 25),QString::number(current_player->getBalltype()));
     //std::cout<<getPlayerflag()<<std::endl;
+
 }
 
 void Game::setMousePosition(Vector2 position)
