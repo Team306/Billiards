@@ -12,7 +12,7 @@
 // define rule in it
 // maybe can use embedded scripts to implement
 enum GAME_RULE {EIGHT_BALL, NINE_BALL, SNOOKER};
-enum JUDGE_RESULT {TO_FREE_BALL, TO_EXCHANGE, TO_GOON, TO_END};
+enum JUDGE_RESULT {NOTJUDGE, TO_FREE_BALL, TO_EXCHANGE, TO_GOON, TO_END};
 
 class Referee
 {
@@ -20,8 +20,9 @@ private:
 	// in referee is a state machine, log the game state
 	float ballRadius;
     GAME_RULE game_rule;
-    JUDGE_RESULT judge_rusult;
+    JUDGE_RESULT judge_result;
     int scoreToadd;
+    bool judgeSelfball(Player *, std::string);
 
 public:
 	Referee();
@@ -37,6 +38,7 @@ public:
 	float getBallRadius() const;
     JUDGE_RESULT judge(Player*,std::vector<Ball>);
     int getScoreToadd() const;
+    void clearjudgeResult();
  };
 
 

@@ -31,6 +31,7 @@ public:
 
 	// get and set
 	Ball& getCueBall();
+    std::vector<Ball> getBallsList() const;
 
 	bool isRunning() const;
 };

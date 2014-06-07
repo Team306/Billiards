@@ -7,7 +7,8 @@
 
 enum PLAYER_FLAG { LOCAL, GUEST};
 enum EIGHTBALL_TYPE { NOTDEF, SMALL, BIG};
-enum SONKER_BALLTYPE {RED,COLOR};
+enum SONKER_BALLTYPE {RED, COLOR};
+enum GAME_RESULT {NOTDEC, SUCCESS, FAIL};
 
 class Player
 {
@@ -18,6 +19,9 @@ public:
     void Exchange();
     void init();
     std::string getFirsthit() const;
+    void setFirsthit(std::string);
+    int getHitflag() const;
+    void setHitflag(int);
 
     std::vector<std::string> getOnpocketlist() const;
     void setOnpocketlist(std::string);
@@ -34,6 +38,9 @@ public:
     int getScore() const;
     void scoreAdd(int);
 
+    GAME_RESULT getGameresult() const;
+    void setGameresult(int);
+
 private:
     PLAYER_FLAG player_flag;
     EIGHTBALL_TYPE eightball_type;
@@ -41,6 +48,7 @@ private:
     int hit_flag;
     std::string first_hit;
     std::vector<std::string>  on_pocket_list;
+    GAME_RESULT game_result;
     int cueball_in;
     int score;
 };

@@ -6,6 +6,7 @@
 Referee::Referee()
 {
     scoreToadd = 0;
+    judge_result = NOTJUDGE;
 }
 
 Referee::~Referee()
@@ -16,9 +17,10 @@ Referee::~Referee()
 void Referee::init(int gameRule)
 {
 	// read config file
-    gameRule = (GAME_RULE)gameRule;
+    judge_result = NOTJUDGE;
+    game_rule = (GAME_RULE)gameRule;
     std::ifstream fin;
-    switch(gameRule){
+    switch(game_rule){
         case EIGHT_BALL:
             fin.open("config.txt");
             break;
@@ -154,28 +156,96 @@ float Referee::getBallRadius() const
 }
 
 JUDGE_RESULT Referee::judge(Player *_currentplayer, std::vector<Ball> _ballslist){
+    std::vector<std::string> onPocketlist = _currentplayer->getOnpocketlist();
+    int eightball_selfball=0;
     switch(game_rule){
         case EIGHT_BALL:
-            if(_currentplayer->getCueball_in()){       //cueball in
-                judge_rusult = TO_FREE_BALL;
-                break;
-            }
-            if(_currentplayer->getBalltype() == SMALL && _currentplayer->getFirsthit() != "one" && _currentplayer->getFirsthit() != "two"
-                    && _currentplayer->getFirsthit() != "three" && _currentplayer->getFirsthit() != "four" && _currentplayer->getFirsthit() != "five"
-                    &&_currentplayer->getFirsthit() != "six" &&_currentplayer->getFirsthit() != "seven"){
-                judge_rusult = TO_EXCHANGE;
-                break;
-            }
-            if(_currentplayer->getBalltype() == SMALL && _currentplayer->getFirsthit() != "one" && _currentplayer->getFirsthit() != "two"
-                    && _currentplayer->getFirsthit() != "three" && _currentplayer->getFirsthit() != "four" && _currentplayer->getFirsthit() != "five"
-                    &&_currentplayer->getFirsthit() != "six" &&_currentplayer->getFirsthit() != "seven"){
-                judge_rusult = TO_EXCHANGE;
-                break;
+        //eight on pocket
+        for(int i=0; i<onPocketlist.size(); i++){
+            if(onPocketlist[i] == "eight"){
+                for(int j=0; j<_ballslist.size(); j++){
+                    if(judgeSelfball(_currentplayer, _ballslist[j].getName())){
+                         _currentplayer->setGameresult(FAIL);
+                         break;
+                    }
+                }
+
+                if(_currentplayer->getGameresult() == NOTDEC){
+                    for(int k=0; k<onPocketlist.size(); k++){
+                        if(judgeSelfball(_currentplayer, onPocketlist[k])||onPocketlist[k]=="cueBall"){
+                            _currentplayer->setGameresult(FAIL);
+                            break;
+                        }
+                    }
+
+                    if(_currentplayer->getGameresult() == NOTDEC){
+                        _currentplayer->setGameresult(SUCCESS);
+                    }
+                    return TO_END;
+                }
+
+                if(_currentplayer->getGameresult() == FAIL){
+                    return TO_END;
+                }
             }
 
+            if(judgeSelfball( _currentplayer,onPocketlist[i])){
+                      eightball_selfball = 1;
+            }
+
+        }
+
+
+            if(_currentplayer->getCueball_in()){       //cueball in
+                return TO_FREE_BALL;
+            }
+
+            if(eightball_selfball ==0){       //no selfball
+                return TO_EXCHANGE;
+            }
+
+            //first hit other's ball
+            if(judgeSelfball(_currentplayer,_currentplayer->getFirsthit())==false){
+                return TO_EXCHANGE;
+            }
+
+            //hit no ball
+            if(_currentplayer->getHitflag()==0){
+                return TO_EXCHANGE;
+            }
+
+            return TO_GOON;
     }
 }
 
 int Referee::getScoreToadd() const{
     return scoreToadd;
+}
+
+bool Referee::judgeSelfball(Player *_currentplayer, std::string ballname){
+    if(_currentplayer->getBalltype() == SMALL){
+        if(ballname == "one" || ballname == "two" || ballname == "three"
+                ||ballname == "four" || ballname == "five" || ballname == "six"
+                ||ballname == "seven"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    if(_currentplayer->getBalltype() == BIG){
+        if(ballname == "nine" || ballname == "ten" || ballname == "eleven"
+                ||ballname == "twelve" || ballname == "thirteen" || ballname == "fourteen"
+                ||ballname == "fifteen"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
+
+void Referee::clearjudgeResult(){
+    judge_result = NOTJUDGE;
 }

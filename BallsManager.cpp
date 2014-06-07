@@ -45,7 +45,10 @@ void BallsManager::Update(Table& table, Player *currentplayer)
     	// first detect cue ball
 		if (cueBall.collidesWith(ballsList[i]))
 		{
-            currentplayer->setOnpocketlist(ballsList[i].getName());
+            if(currentplayer->getHitflag()==0){
+                currentplayer->setHitflag(1);
+                currentplayer->setFirsthit(ballsList[i].getName());
+            }
             // change speed or sth else
 			
 			// test
@@ -95,7 +98,7 @@ void BallsManager::Update(Table& table, Player *currentplayer)
                 }
                 else{
                     if(ballsList[i].getName() == "eight"){
-
+                        currentplayer->setGameresult(FAIL);
                     }
                     else{
                        currentplayer->setBalltype(BIG);
@@ -145,4 +148,8 @@ bool BallsManager::isRunning() const
 		return false;
 	}
 	return true;
+}
+
+std::vector<Ball> BallsManager::getBallsList() const{
+    return ballsList;
 }

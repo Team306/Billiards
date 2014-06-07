@@ -68,7 +68,7 @@ void Game::Update()
 		case BALL_IS_RUNNING:
 			if (!ballsManager.isRunning())
 			{
-                if(current_player->getCueball_in()){
+                if(referee.judge(current_player,ballsManager.getBallsList()) == TO_FREE_BALL){
                     gameState = FREE_BALL;
                     if(current_player->getPlayerflag() == LOCAL){
                         current_player->Exchange();
@@ -81,7 +81,31 @@ void Game::Update()
                         break;
                     }
                 }
-                gameState = WAIT_FOR_STROKE;
+
+                if(referee.judge(current_player,ballsManager.getBallsList()) == TO_EXCHANGE){
+                    gameState = WAIT_FOR_STROKE;
+                    if(current_player->getPlayerflag() == LOCAL){
+                        current_player->Exchange();
+                        current_player = &player2;
+                        break;
+                    }
+                    else{
+                        current_player->Exchange();
+                        current_player = &player1;
+                        break;
+                    }
+                }
+
+                if(referee.judge(current_player,ballsManager.getBallsList()) == TO_GOON){
+                    gameState = WAIT_FOR_STROKE;
+                    break;
+                }
+
+                if(referee.judge(current_player,ballsManager.getBallsList()) == TO_END){
+                    gameState = END_FRAME;
+                    break;
+                }
+
 				// call the referee
 			}
 			break;

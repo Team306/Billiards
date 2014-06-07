@@ -6,6 +6,7 @@ Player::Player(){
     score = 0;
     toHit_balltype = RED;
     eightball_type = NOTDEF;
+    game_result = NOTDEC;
     on_pocket_list.clear();
 }
 
@@ -41,16 +42,24 @@ std::string Player::getFirsthit() const{
     return first_hit;
 }
 
+void Player::setFirsthit(std::string _ballname){
+    first_hit = _ballname;
+}
+
+int Player::getHitflag() const{
+    return hit_flag;
+}
+
+void Player::setHitflag(int _hitflag){
+    hit_flag = _hitflag;
+}
+
 std::vector<std::string> Player::getOnpocketlist() const{
     return on_pocket_list;
 }
 
 void Player::setOnpocketlist(std::string _onpocket){
     on_pocket_list.push_back(_onpocket);
-    if(hit_flag == 0){
-        hit_flag = 1;
-        first_hit = _onpocket;
-    }
 }
 
 EIGHTBALL_TYPE Player::getBalltype() const {
@@ -72,6 +81,7 @@ void Player::setPlayerflag(int player){
 
 void Player::init(){
     eightball_type = NOTDEF;
+    game_result = NOTDEC;
     hit_flag = 0;
     cueball_in = 0;
     score = 0;
@@ -94,5 +104,13 @@ int Player::getScore() const {
 
 void Player::scoreAdd(int _score) {
     score += _score;
+}
+
+GAME_RESULT Player::getGameresult() const{
+    return game_result;
+}
+
+void Player::setGameresult(int _result){
+    game_result = (GAME_RESULT) _result;
 }
 
