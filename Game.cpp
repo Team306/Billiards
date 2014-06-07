@@ -228,6 +228,7 @@ void Game::Draw(QPainter& painter)
     painter.drawText(QRectF(580, 640, 50, 25), QString::number(elapsedTime));
     painter.drawText(QRectF(400, 640, 100, 100),QString::number(current_player->getPlayerflag()));
     painter.drawText(QRectF(400, 600, 50, 25),QString::number(current_player->getBalltype()));
+    painter.drawText(QRectF(500, 600, 50, 25),QString::number(current_player->getHitflag()));
     //std::cout<<getPlayerflag()<<std::endl;
 }
 
