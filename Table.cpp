@@ -15,8 +15,8 @@ void Table::init(Referee& referee)
 	// init method
     picPosition.setXY(0, 0);
     position.setXY(40, 40);
-    picSize.setXY(1280, 680);
-    size.setXY(1200, 600);
+    picSize.setXY(1240, 720);
+    size.setXY(1160, 640);
     pocketRadius = 40;
 
     p1.setXY(position.getX() + size.getX(), position.getY());
@@ -77,13 +77,12 @@ void Table::Draw(QPainter& painter)
     painter.drawEllipse(QPoint(picPosition.getX()+picSize.getX()/2, picPosition.getY()+40),40,40);
     painter.drawEllipse(QPoint(picPosition.getX()+picSize.getX()/2, picPosition.getY()+size.getY()+40),40,40);
 
-    painter.setPen(QPen(QColor(0, 0, 0)));
+    painter.setPen(QPen(QColor(0, 0, 255)));
     painter.setBrush(QBrush(QColor(68, 149, 60)));
     painter.drawRoundRect(QRectF(position.getX(), position.getY(), size.getX(), size.getY()),7,14);
 
     painter.setPen(QPen(QColor(255,255,255)));
-    float lineX = (float)65 / (float)254 * size.getX();
-    painter.drawLine(position.getX() + lineX, position.getY(), position.getX() + lineX, position.getY() + size.getY());
+    painter.drawLine(position.getX()+300,position.getY(),position.getX()+300,position.getY()+size.getY());
     //test
     painter.setBrush(QBrush(QColor(100,100,100)));
     /*painter.drawRect(R1);
@@ -181,7 +180,7 @@ bool Table::collidesWith(Ball& b)
     }
 
     //bottomleft_pocket, 2 points
-    Vector2 detectP7(position.getX() + pocketRadius, position.getY() + size.getY());//bottom
+    Vector2 detectP7(position.getX() + pocketRadius, position.getY());//bottom
     Vector2 detectP8(position.getX(), position.getY() + size.getY() - pocketRadius);//left
     if(b.getPosition().DistanceTo(detectP7) <= b.getRadius())
     {
