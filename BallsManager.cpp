@@ -2,7 +2,7 @@
 
 #include "BallsManager.h"
 
-BallsManager::BallsManager()
+BallsManager::BallsManager():collideengine()
 {
 }
 
@@ -25,10 +25,10 @@ void BallsManager::reset(Referee& referee)
 void BallsManager::Update(Table& table, Player *currentplayer)
 {
 	// Update each ball
-    cueBall.Update();
+    cueBall.Move();
 	for (std::vector<Ball>::iterator iter = ballsList.begin(); iter != ballsList.end(); ++iter)
 	{
-		iter->Update();
+        iter->Move();
 	}
 
     // detect collision
@@ -43,19 +43,13 @@ void BallsManager::Update(Table& table, Player *currentplayer)
     for (unsigned i = 0; i < ballsList.size(); ++i)
     {
     	// first detect cue ball
-		if (cueBall.collidesWith(ballsList[i]))
+        if (this->collideengine.DectBallToBallCollision(cueBall,ballsList[i]))
 		{
             if(currentplayer->getHitflag() == 0 ){
                 currentplayer->setHitflag(1);
                 currentplayer->setFirsthit(ballsList[i].getName());
             }
-            // change speed or sth else
-			
-			// test
-
-            //cueBall.setSpeed(Vector2());
-
-            // cueBall.setSpeed(Vector2());
+            collideengine.ProcessBallToBallCollision(cueBall,ballsList[i]);
 		}
 
 		// and then detect the balls with table
@@ -68,10 +62,9 @@ void BallsManager::Update(Table& table, Player *currentplayer)
 		// finally detect other ball
     	for (unsigned j = i + 1; j < ballsList.size(); ++j)
     	{
-    		if (ballsList[i].collidesWith(ballsList[j]))
+            if (this->collideengine.DectBallToBallCollision(ballsList[i],ballsList[j]))
     		{
-    			// change speed or sth else
-
+                this->collideengine.ProcessBallToBallCollision(ballsList[i],ballsList[j]);
     		}
     	}
     }
@@ -82,7 +75,7 @@ void BallsManager::Update(Table& table, Player *currentplayer)
     	// call the referee, and next turn game change to free ball
         //cueBall.setSpeed(Vector2((0 - cueBall.getSpeed().getX()), (0 - cueBall.getSpeed().getY())));
         // cueBall.setSpeed(Vector2((0 - cueBall.getSpeed().getX()), (0 - cueBall.getSpeed().getY())));
-        cueBall.setSpeed(Vector2(0, 0));
+        cueBall.setSpeed(Vector3(0, 0, 0));
         currentplayer->setCueball_in(1);
     }
     for (unsigned i = 0; i < ballsList.size(); ++i)
