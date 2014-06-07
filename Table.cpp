@@ -77,7 +77,7 @@ void Table::Draw(QPainter& painter)
     painter.drawEllipse(QPoint(picPosition.getX()+picSize.getX()/2, picPosition.getY()+40),40,40);
     painter.drawEllipse(QPoint(picPosition.getX()+picSize.getX()/2, picPosition.getY()+size.getY()+40),40,40);
 
-    painter.setPen(QPen(QColor(0, 0, 255)));
+    painter.setPen(QPen(QColor(0, 0, 0)));
     painter.setBrush(QBrush(QColor(68, 149, 60)));
     painter.drawRoundRect(QRectF(position.getX(), position.getY(), size.getX(), size.getY()),7,14);
 
