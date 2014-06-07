@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include "Referee.h"
+#include <iostream>
 
 #ifndef EIGHT_BALL_CONFIG_FILENAME
 #define EIGHT_BALL_CONFIG_FILENAME "test8_config.txt"
@@ -186,13 +187,9 @@ JUDGE_RESULT Referee::judge(Player *_currentplayer, std::vector<Ball> _ballslist
 
                     if(_currentplayer->getGameresult() == NOTDEC){
                         _currentplayer->setGameresult(SUCCESS);
-                    }
-                    return TO_END;
+                    }    
                 }
-
-                if(_currentplayer->getGameresult() == FAIL){
-                    return TO_END;
-                }
+                return TO_END;
             }
 
             if(judgeSelfball( _currentplayer,onPocketlist[i])){
@@ -200,7 +197,6 @@ JUDGE_RESULT Referee::judge(Player *_currentplayer, std::vector<Ball> _ballslist
             }
 
         }
-
 
             if(_currentplayer->getCueball_in()){       //cueball in
                 return TO_FREE_BALL;
@@ -214,9 +210,7 @@ JUDGE_RESULT Referee::judge(Player *_currentplayer, std::vector<Ball> _ballslist
             if(judgeSelfball(_currentplayer,_currentplayer->getFirsthit())==false){
                 return TO_EXCHANGE;
             }
-            if(_currentplayer->getCueball_in()){       //cueball in
-                return TO_FREE_BALL;
-            }
+
             if(_currentplayer->getBalltype() == SMALL && _currentplayer->getFirsthit() != "one" && _currentplayer->getFirsthit() != "two"
                     && _currentplayer->getFirsthit() != "three" && _currentplayer->getFirsthit() != "four" && _currentplayer->getFirsthit() != "five"
                     &&_currentplayer->getFirsthit() != "six" &&_currentplayer->getFirsthit() != "seven"){
@@ -297,3 +291,4 @@ bool Referee::judgeSelfball(Player *_currentplayer, std::string ballname){
 void Referee::clearjudgeResult(){
     judge_result = NOTJUDGE;
 }
+

@@ -9,11 +9,12 @@ ballRadius 21
 # each line is X Y and R G B and ball name
 
 ballsList
-4
-90 90 243 199 1 one
+5
+90 590 243 199 1 one
 1190 590 52 46 227 two
-90 590 0 0 0 eight
-1190 90 255 252 250 fifteen
+90 90 0 0 0 eight
+620 90 255 252 250 fifteen
+640 590 255 200 200 thirteen
 
 # get cue ball info
 

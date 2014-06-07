@@ -1,6 +1,7 @@
 // Copyright (C) 2014 Team306
 
 #include "BallsManager.h"
+#include <iostream>
 
 BallsManager::BallsManager()
 {
@@ -25,20 +26,8 @@ void BallsManager::reset(Referee& referee)
 void BallsManager::Update(Table& table, Player *currentplayer)
 {
 	// Update each ball
-<<<<<<< HEAD
-=======
+
     cueBall.Move();
-=======
-    /*Vector2 acc = cueBall.getSpeed().getNormalize()*0.3;
-    Vector2 temp = cueBall.getSpeed()-acc;
-    if(temp.getX()*cueBall.getSpeed().getX()<=0){
-        cueBall.setSpeed(Vector2());
-    }
-    else{
-        cueBall.setSpeed(temp);
-    }*/
->>>>>>> parent of 2c01fee... new collide
-    cueBall.Update();
 	for (std::vector<Ball>::iterator iter = ballsList.begin(); iter != ballsList.end(); ++iter)
 	{
 		iter->Update();
@@ -62,28 +51,16 @@ void BallsManager::Update(Table& table, Player *currentplayer)
                 currentplayer->setHitflag(1);
                 currentplayer->setFirsthit(ballsList[i].getName());
             }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-            collideengine.ProcessBallToBallCollision(cueBall,ballsList[i]);
-=======
 
->>>>>>> parent of 2c01fee... new collide
+            collideengine.ProcessBallToBallCollision(cueBall,ballsList[i]);
             // change speed or sth else
 			
 			// test
 
-<<<<<<< HEAD
-            //cueBall.setSpeed(Vector2());
-
-            // cueBall.setSpeed(Vector2());
-=======
             ballsList[i].setSpeed(cueBall.getSpeed());
             cueBall.setSpeed(Vector2());
 
             // cueBall.setSpeed(Vector2());
->>>>>>> cba5d16caf80af621b257e6ae96b1e5ce09ea13a
->>>>>>> parent of 2c01fee... new collide
 		}
 
 		// and then detect the balls with table
@@ -98,19 +75,10 @@ void BallsManager::Update(Table& table, Player *currentplayer)
     	{
     		if (ballsList[i].collidesWith(ballsList[j]))
     		{
-<<<<<<< HEAD
+
     			// change speed or sth else
 
-=======
-<<<<<<< HEAD
                 this->collideengine.ProcessBallToBallCollision(ballsList[i],ballsList[j]);
-=======
-    			// change speed or sth else
-                ballsList[i].setSpeed(ballsList[i].getSpeed()*(-0.7));
-                ballsList[j].setSpeed(ballsList[i].getSpeed()*0.6);
-
->>>>>>> cba5d16caf80af621b257e6ae96b1e5ce09ea13a
->>>>>>> parent of 2c01fee... new collide
     		}
     	}
     }
@@ -130,6 +98,7 @@ void BallsManager::Update(Table& table, Player *currentplayer)
     	{
     		// if ball is into the pocket, delete the ball
             currentplayer->setOnpocketlist(ballsList[i].getName());
+
             if(currentplayer->getBalltype() == NOTDEF){
                 if(ballsList[i].getName() == "one" || ballsList[i].getName() == "two" || ballsList[i].getName() == "three"
                         || ballsList[i].getName() == "four"||ballsList[i].getName() == "five" ||ballsList[i].getName() == "six" ||ballsList[i].getName() == "seven"){
